@@ -12,3 +12,5 @@
 /* Your CSS partials */
 @import url("components/index.css");
 @import url("../stylesheets/pages/home.css");
+@import url("../stylesheets/pages/main.css");
+@import url("../stylesheets/pages/menu.css");

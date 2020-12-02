@@ -1,24 +1,41 @@
-body {
+html, body {
+
   background-image: url(../../images/bg.png);
-  background-position: center center;
+  /* background-position: center center; */
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  height:100%;
+  width:100%;
+  margin:0;
 }
 
-.container {
+body {
+  display:flex;
+}
+
+.container-home {
   width: 480px;
   margin: auto;
-  height: 100vh;
-  /* position: absolute; */
+  /* height: 100vh; */
 }
 
-.login-form {
+.title {
   text-align: center;
-  height: 100vh;
-  vertical-align: middle;
-
 }
-h1 {
-  align-content: center;
+
+form {
+  text-align: center;
+}
+
+input {
+  height: 20px;
+  max-width: 480px;
+}
+
+.submit {
+  height: 20px;
+  max-width: 480px;
+  background-color: #fc7033;
+  color: #EAEAEA;
 }

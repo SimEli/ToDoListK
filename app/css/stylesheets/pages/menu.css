@@ -11,17 +11,40 @@ h1 {
   justify-content: space-between;
 }
 
-.task-list {
+.list-list {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: tomato;
 }
 
-.task-list svg {
+.list-list svg {
   height: 30px;
   width: 30px;
 }
-.Task-button {
+
+.new-list-name {
+  display: flex;
+  margin: 15px 5px;
+  height: 50px;
+  background-color: #ffc35e;
+  padding: 10px 15px;
+  align-items: center;
+}
+
+.new-list-name input {
+  width: 450px;
+  margin-right: 15px;
+}
+
+.new-list-name button {
+  height: 40px;
+  width: 40px;
+  background-color: #ffaa4d;
+  color: white;
+  align-items: center;
+}
+
+.list-button {
   justify-content: space-between;
   display: flex;
   height: 60px;
@@ -32,43 +55,45 @@ h1 {
   align-items: center;
 }
 
-.task_name{
-  padding-left: 15px;
-  height: 60px;
-  align-items: center;
-}
-.task_name p {
-  /* margin: auto; */
-}
-.check-task_name-onLeft {
+.list_name-onLeft {
   display: flex;
   align-items: center;
   padding-left: 5px;
   height: 60px;
 }
 
-.deadline-favorite-onRight svg {
-  padding-left: 5px;
+.list_name{
+  padding-left: 15px;
+  height: 60px;
+  align-items: center;
 }
-a {
-  text-decoration: none;
+
+.delete-list-button {
+  height: 50px;
+  width: 50px;
+  background-color: #e96330;
+
 }
-.add-task-button {
+
+.logout-button {
   display: flex;
   height: 60px;
-  width: 98%;
-  position: center;
+  width: 540px;
+
   /* On click: Go to create task */
-  font-size: 19.5px;
+  font-size: 22.5px;
   text-align: start;
   justify-content: space-between;
   margin: 5px auto;
   align-items: center;
   color: white;
-  background-color: teal;
+  background-color: #e96330;
+  
 }
 
 
 .title-menu-bar path { fill: white; }
 
-.add-task-button path { fill: white; }
+.delete-list-button path { fill: white; }
+
+.logout-button path { fill: white; }
