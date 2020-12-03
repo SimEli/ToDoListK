@@ -1,26 +1,30 @@
 $(function(){
-  alert('jQuery est prêt !');
+  console.log('jQuery est prêt !');
 
-  $("container-main").hide();
+  // $(".container-main").hide();
+});
+    $("#enter").on('click', function(){
 
-  $(".submit").on('click', function(){
+      $(".container-main").toggle();
+      $(".container-home").hide();
+    });
 
-    $("container-main").toggle();
-    $("container-home").toggle();
-  });
-
-  $("container-menu").hide();
-  $("container-create").hide();
+  homePage();
   
   // $(".submit").on('click', function(){
 
   //   $("container-main").toggle();
   // });
 
-});
 
 
 
+
+
+function homePage() {
+  $(".container-menu").hide();
+  $(".container-create").hide();
+}
 // $(".title-menu-bar").click(function(){
 //   $('.list-list').toggle();
 

@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../app/css/stylesheets/style.css">
+    <link rel="stylesheet" href="./css/stylesheets/style.css">
+    <script src="../app/toDoList.js"></script>
     <title>TO DO LIST</title>
   </head>
   <body>
     <div class="container-home">
       <h1 class="title">Welcome on TO DO LIST</h1>
-      <form action="" method="POST">
+      <form action="" method="">
           <p>
-            <input type="text" placeholder="Username" name="uname" required>
+            <input type="text" placeholder="Username" name="uname" >
           </p>
           <p>
-            <input type="password" placeholder="Password" name="psw" required>
+            <input type="password" placeholder="Password" name="psw" >
           </p>
           <p>
             <input class="submit" type="submit" value="Login">
@@ -22,7 +23,8 @@
           <p>
             <input class="submit" type="submit" value="Sign in with Google">
           </p>
-      </form>
+        </form>
+        <button id="enter">TEST</button>
     </div>
 
     <!-- content of main screen (all my tasks) below -->
@@ -332,6 +334,6 @@
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
       crossorigin="anonymous">
     </script>
-    <script src="../app/toDoList.js"></script>
+    
   </body>
 </html>
