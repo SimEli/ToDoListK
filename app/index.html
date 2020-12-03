@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/stylesheets/style.css">
-    <title>Main Screen</title>
+    <title>TO DO LIST</title>
   </head>
   <body>
+    <div class="container-home">
+      <h1 class="title">Welcome on TO DO LIST</h1>
+      <form action="" method="POST">
+          <p>
+            <input type="text" placeholder="Username" name="uname" required>
+          </p>
+          <p>
+            <input type="password" placeholder="Password" name="psw" required>
+          </p>
+          <p>
+            <input class="submit" type="submit" value="Login">
+          </p>
+          <p>
+            <input class="submit" type="submit" value="Sign in with Google">
+          </p>
+      </form>
+    </div>
+
+    <!-- content of main screen (all my tasks) below -->
+
     <div class="container-main">
-      <div class="title-menu-bar">
+      <div class="title-main-bar">
         <h1 class="title">All My Tasks</h1>
         <a href="../views/menu.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 17h-12v-2h12v2zm0-4h-12v-2h12v2zm0-4h-12v-2h12v2z"/></svg>
@@ -135,5 +155,183 @@
           </a>
         </div>
     </div>
+
+    <!-- content of menu screen (My To Do List) below -->
+
+    <div class="container-menu">
+      <div class="title-menu-bar">
+        <h1 class="title">My To Do List</h1>
+        <span></span>
+      </div>
+        <div class="list-list">
+          <div class="new-list-name">
+            <form action="" method="post"></form>
+            
+              <input type="text" placeholder="New List Name" name="listName" required>
+            
+            
+              <button class="submit" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg></button>
+            
+          </div>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <button class="list-button"> 
+            <div class="list_name_onLeft">
+              <div class="list_name"><p>My first List</p>
+              </div>
+            </div>
+            <div class="delete-list-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z"/></svg>
+            </div>
+          </button>
+          <br>
+          <a href="../views/index.html">
+            <button class="logout-button">
+              <p>
+              Logout
+              </p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.707 13.946l-1.035 1.054h-.672v1h-1v1h-3v-2.292l3.146-3.185c.496 1.111 1.419 1.988 2.561 2.423zm5.293-4.279c0 2.025-1.642 3.667-3.667 3.667-2.024 0-3.666-1.642-3.666-3.667s1.642-3.667 3.666-3.667c2.025 0 3.667 1.642 3.667 3.667zm-1.375-1.375c0-.506-.41-.917-.917-.917s-.916.411-.916.917.409.917.916.917.917-.411.917-.917z"/></svg>
+            </button>
+          </a>
+        </div>
+    </div>
+
+    <!-- content of create screen below -->
+
+    <div class="container-create">
+      <div class="title-menu-bar">
+        <h1 class="title">Create Task</h1>
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffff66" stroke="black" stroke-width="2" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+        </a>
+      </div>
+      <div class="form-new-task">
+        <form action="" method="post">
+          <p>
+            <label for="taskName">Task Name</label>
+            <input type="text" name="taskName" id="taskName" placeholder="task Name">
+          </p>
+          <p>
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="task description">
+          </p>      
+          <p>
+            <label for="list">List</label>
+            <select name="list" id="list" placeholder="Select a list here"></select>
+          </p>
+          <p>
+            <label for="startDate">Start Date</label>
+            <input type="date" name="startDate" id="startDate">
+          </p>
+          <p>
+            <label for="deadline">Deadline</label>
+            <input type="date" name="deadline" id="deadline">
+          </p>
+
+        </form>
+      </div>
+      <a href="#">
+        <button class="save-task-button">
+          <p>
+          Save
+          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.25 8.891l-1.421-1.409-6.105 6.218-3.078-2.937-1.396 1.436 4.5 4.319 7.5-7.627z"/></svg>
+        </button>
+      </a>
+      <a href="../views/main.html">
+        <button class="cancel-button">
+          <p>
+          Cancel
+          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z"/></svg>
+        </button>
+      </a>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous">
+    </script>
+    <script src="../toDoList.js"></script>
   </body>
 </html>
