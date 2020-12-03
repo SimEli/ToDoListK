@@ -1,15 +1,29 @@
 $(function(){
-  // alert('jQuery est prêt !');
+  alert('jQuery est prêt !');
+
+  $("container-main").hide();
+
+  $(".submit").on('click', function(){
+
+    $("container-main").toggle();
+    $("container-home").toggle();
+  });
+
+  $("container-menu").hide();
+  $("container-create").hide();
+  
+  // $(".submit").on('click', function(){
+
+  //   $("container-main").toggle();
+  // });
+
 });
 
-// $('p').each(function(){
-// $(this).html('Hello World !'); // $(this) représente le paragraphe courant
+
+
+// $(".title-menu-bar").click(function(){
+//   $('.list-list').toggle();
+
+// $('div').on('click', function(){
+// location.href="menu.html";
 // });
-
-$('div').on('click', function(){
-location.href="menu.html";
-});
-
-$(".title-menu-bar").click(function(){
-  $('.list-list').toggle();
-});
