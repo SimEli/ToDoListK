@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/stylesheets/style.css">
+    <link rel='icon' href='/css/images/list.ico' type='image/x-icon'/ >
+    <title>TO DO LIST</title>
+  </head>
+  <body>
+    <div class="container-home">
+      <h1 class="title">Welcome on TO DO LIST</h1>
+      <form action="" method="">
+          <p>
+            <input type="text" placeholder="Username" name="uname" >
+          </p>
+          <p>
+            <input type="password" placeholder="Password" name="psw" >
+          </p>
+          <p>
+            <input class="submit" type="submit" value="Login">
+          </p>
+          <p>
+            <input class="submit" type="submit" value="Sign in with Google">
+          </p>
+        </form>
+        <button id="enter">TEST</button>
+    </div>
+
+    <!-- content of main screen (all my tasks) below -->
+
+    <div class="container-main">
+      <div class="title-main-bar">
+        <h1 class="title">All My Tasks</h1>
+        <div id="menuBtn"></div>
+      </div>
+        <div class="task-list">
+          <div class="list-of-task">
+            <div class="task-button"> 
+              <div class="check-task_name-onLeft">
+                <div class="uncheckedBtn"></div>
+                <div class="task-name"><h1>My first Task</h1>
+                </div>
+              </div>
+              <div class="deadline-favorite-onRight">
+                <div class="deadlineBtn" title="Remaining Time : 1s"></div>
+                <div class="unFavorite"></div>
+              </div>
+            </div>
+          </div>
+          <div class="addATask-button">
+            <h2 class="title">Add a Task</h2>
+            <div id="addATaskBtn"></div>
+          </div>
+        </div>
+    </div>
+
+    <!-- content of menu screen (My To Do List) below -->
+
+    <div class="container-menu">
+      <div class="title-menu-bar">
+        <h1 class="title">My To Do List</h1>
+        <div class="closeBtn"></div>
+      </div>
+        <div class="menu-list">
+          <div class="new-list-name">
+              <input type="text" placeholder="New List Name" name="listName" class="listName">
+              <div class="submit-list" ></div>
+          </div>
+          <div class="list-of-list">
+            <div class="list-button">
+              <div class="list-name"><h3>` + text + `</h3></div>
+              <div class="delete-list-button"></div>
+            </div>
+          </div>
+          <br>
+          <div class="logout-button">
+            <h1 class="title">Logout</h1>
+            <div id="logoutBtn"></div>
+          </div>
+        </div>
+    </div>
+
+    <!-- content of create/edit screen below -->
+
+    <div class="container-create">
+      <div class="title-create-bar">
+        <input type="text" name="taskName" class="taskName" placeholder="Task Name">
+        <div class="unFavorite"></div>
+      </div>
+      <div class="taskDone-stopTask-buttons">
+        <div class="taskDone-button">
+          <h2 class="title">Task Done</h2>
+          <div class="taskDoneBtn"></div>
+        </div>
+        <div class="stopTask-button">
+          <h2 class="title">Stop Task</h2>
+          <div class="stopTaskBtn"></div>
+        </div>
+      </div>
+      <div class="form-new-task">
+        <!-- <form action="" method="post"> -->
+          <div>
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="task description">
+          </div>
+          <div>
+            <label for="list">List</label>
+            <select name="list" id="list" placeholder="Select a list here"></select>
+          </div>
+          <div>
+            <label for="startDate">Start Date</label>
+            <input type="date" name="startDate" id="startDate">
+          </div>
+          <div>
+            <label for="deadline">Deadline</label>
+            <input type="date" name="deadline" id="deadline">
+          </div>
+          <p class="remainingTime-display">remainingTime-display</p>
+        <!-- </form> -->
+      </div>
+      <div class="save-cancel-delete-buttons">
+        <div class="save-button">
+          <h2 class="title">Save</h2>
+          <div class="saveBtn"></div>
+        </div>
+        <div class="cancel-button">
+          <h2 class="title">Cancel</h2>
+          <div class="cancelBtn"></div>
+        </div>
+        <div class="delete-button">
+          <h2 class="title">Delete</h2>
+          <div class="deleteBtn"></div>
+        </div>
+      </div>  
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous">
+    </script>
+    <script src="toDoList.js"></script>
+  </body>
+</html>
