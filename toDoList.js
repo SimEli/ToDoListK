@@ -55,7 +55,15 @@ $(document).ready(function(){
     $(".delete-button").addClass("displayed");
     var $text = $(this).text();
     $('.taskName').val($text);
-
+    // Delete button action in EDIT
+    // $('.delete-button').on('click', function() {
+    //   $('.task-name').remove();
+    //   $(".container-create").toggle();
+    //   $(".container-main").show();
+    //   $('.taskName').val('');
+    //   $(".taskDone-stopTask-buttons").removeClass("displayed");
+    //   $(".delete-button").removeClass("displayed");
+    // });
   });
 
   // Check Button action click on task list
@@ -128,5 +136,7 @@ $(document).ready(function(){
   $('.list-of-list').on('click', '.delete-list-button', function() {
     $(this).parent(".list-button").remove();
   });
+
+  
   // input code above, this below is end of ready function
 });
