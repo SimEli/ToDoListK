@@ -34,15 +34,7 @@ $(document).ready(function(){
   $(".cancel-button").on('click', function(){
     $(".container-create").toggle();
     $(".container-main").show();
-    $('.taskName').val('');
-    $(".taskDone-stopTask-buttons").removeClass("displayed");
-    $(".delete-button").removeClass("displayed");
-  });
-
-  // Save Create/edit Task button action, go to main
-  $(".save-button").on('click', function(){
-    $(".container-create").toggle();
-    $(".container-main").show();
+    $('.taskNameInput').val('');
     $(".taskDone-stopTask-buttons").removeClass("displayed");
     $(".delete-button").removeClass("displayed");
   });
@@ -54,16 +46,43 @@ $(document).ready(function(){
     $(".taskDone-stopTask-buttons").addClass("displayed");
     $(".delete-button").addClass("displayed");
     var $text = $(this).text();
-    $('.taskName').val($text);
+    $('.taskNameInput').val($text);
     // Delete button action in EDIT
     // $('.delete-button').on('click', function() {
     //   $('.task-name').remove();
     //   $(".container-create").toggle();
     //   $(".container-main").show();
-    //   $('.taskName').val('');
+    //   $('.taskNameInput').val('');
     //   $(".taskDone-stopTask-buttons").removeClass("displayed");
     //   $(".delete-button").removeClass("displayed");
     // });
+  });
+
+  // "Stop task" button action, display the "Start Task" button in place
+  $('.stopTask-button').on('click', function(){
+    $(".taskDone-stopTask-buttons").removeClass("displayed");
+    $(".startTask-taskDone-buttons").addClass("displayed");
+  });
+
+  // "task done" button action, display "ReStart Task" button in place
+  $('.taskDone-button').on('click', function(){
+    $(".taskDone-stopTask-buttons").removeClass("displayed");
+    $(".startTask-taskDone-buttons").removeClass("displayed");
+    $(".reStartTask-button").addClass("displayed");
+  });
+
+  // "Restart Task" button action, display "Stop task" button in place
+  $('.reStartTask-button').on('click', function(){
+    $(".reStartTask-button").removeClass("displayed");
+    $(".taskDone-stopTask-buttons").addClass("displayed");
+    // $(".startTask-taskDone-buttons").removeClass("displayed");
+  });
+
+  // "Start Task" button action, display "Stop task" button in place
+  $('.startTask-button').on('click', function(){
+    $(".startTask-taskDone-buttons").removeClass("displayed");
+    $(".taskDone-stopTask-buttons").addClass("displayed");
+    // $(".startTask-taskDone-buttons").removeClass("displayed");
   });
 
   // Check Button action click on task list
@@ -89,7 +108,7 @@ $(document).ready(function(){
 
     $saveTask.on('click', function(e) {
       e.preventDefault();
-      var text = $('.taskName').val();
+      var text = $('.taskNameInput').val();
       if (text.length != 0) { 
         $task.append(`
         <div class="task-button"> 
@@ -104,9 +123,15 @@ $(document).ready(function(){
           </div>
         </div>`
         );
+        // Save Create/edit Task button action, go to main
+        $(".container-create").toggle();
+        $(".container-main").show();
+        $(".taskDone-stopTask-buttons").removeClass("displayed");
+        $(".delete-button").removeClass("displayed");
+
       } else alert("Enter some text!")
-      // clear the taskName input after entry 
-      $('.taskName').val('');
+      // clear the taskNameInput input after entry 
+      $('.taskNameInput').val('');
     });
   });
 

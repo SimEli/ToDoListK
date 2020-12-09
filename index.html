@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/stylesheets/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel='icon' href='/css/images/list.ico' type='image/x-icon'/ >
     <title>TO DO LIST</title>
   </head>
   <body>
     <div class="container-home">
-      <h1 class="title">Welcome on TO DO LIST</h1>
+      <h1 class="welcome-title">Welcome on TO DO LIST</h1>
       <form action="" method="">
           <p>
             <input type="text" placeholder="Username" name="uname" >
@@ -85,7 +87,7 @@
 
     <div class="container-create">
       <div class="title-create-bar">
-        <input type="text" name="taskName" class="taskName" placeholder="Task Name">
+        <input type="text" name="taskName" class="taskNameInput" placeholder="Task Name">
         <div class="unFavorite"></div>
       </div>
       <div class="taskDone-stopTask-buttons">
@@ -96,6 +98,22 @@
         <div class="stopTask-button">
           <h2 class="title">Stop Task</h2>
           <div class="stopTaskBtn"></div>
+        </div>
+      </div>
+      <div class="startTask-taskDone-buttons">
+        <div class="startTask-button">
+          <h2 class="title">Start Task</h2>
+          <div class="startTaskBtn"></div>
+        </div>
+        <div class="taskDone-button">
+          <h2 class="title">Task Done</h2>
+          <div class="taskDoneBtn"></div>
+        </div>
+      </div>
+      <div class="reStartTask-button">
+        <div class="reStartTask">
+          <h2 class="title">Restart Task</h2>
+          <div class="reStartTaskBtn"></div>
         </div>
       </div>
       <div class="form-new-task">

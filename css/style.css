@@ -3,7 +3,7 @@
 
 html, body {
 
-  background-image: url(../images/bg.png);
+  background-image: url(images/bg.png);
   /* background-position: center center; */
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,6 +11,7 @@ html, body {
   height:100%;
   width:100%;
   margin:0;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
@@ -24,6 +25,7 @@ h1 {
 h2 {
   margin-left: 40px;
   font-size: 19.5px;
+  color: #EAEAEA;
 }
 
 /* below -------------------------CSS for Home screen */
@@ -33,22 +35,22 @@ h2 {
   /* height: 100vh; */
 }
 
-.title {
+.welcome-title {
   text-align: center;
 }
 
 form {
   text-align: center;
+  max-width: 480px;
+  margin-top: 20px;
 }
 
 input {
   height: 20px;
-  max-width: 480px;
+  width: 340px;
 }
 
 .submit {
-  height: 20px;
-  max-width: 480px;
   background-color: #fc7033;
   color: #EAEAEA;
 }
@@ -59,9 +61,6 @@ input {
   display: none;
   width: 600px;
   margin: 0 auto;
-}
-h1 {
-  font-size: 22.5px;
 }
 
 .title-main-bar {
@@ -76,7 +75,7 @@ h1 {
 #menuBtn  {
   height: 50px;
   width: 50px;
-  background-image: url(../images/menu.svg);
+  background-image: url(images/menu.svg);
   background-size: cover;
   box-shadow: 1px 1px 4px #1C1C22;
   border-radius: 25px;
@@ -104,7 +103,7 @@ h1 {
 .uncheckedBtn  {
   height: 40px;
   width: 40px;
-  background-image: url(../images/not_check.svg);
+  background-image: url(images/not_check.svg);
   background-repeat: no-repeat;
   background-size: cover;
   /* box-shadow: 1px 1px 4px #1C1C22; */
@@ -114,11 +113,11 @@ h1 {
 }
 
 .uncheckedBtn:hover {
-  background-image: url(../images/check.svg);
+  background-image: url(images/check.svg);
 }
 
 .checked {
-  background-image: url(../images/check.svg);
+  background-image: url(images/check.svg);
 }
 .task-name {  
   cursor: pointer;
@@ -143,7 +142,7 @@ h1 {
 .deadlineBtn  {
   height: 40px;
   width: 40px;
-  background-image: url(../images/time.svg);
+  background-image: url(images/time.svg);
   background-repeat: no-repeat;
   background-size: cover;
   /* box-shadow: 1px 1px 4px #1C1C22; */
@@ -156,7 +155,7 @@ h1 {
 .unFavorite {
   height: 40px;
   width: 40px;
-  background-image: url(../images/empty_star.svg);
+  background-image: url(images/empty_star.svg);
   background-repeat: no-repeat;
   background-size: cover;
   /* box-shadow: 1px 1px 4px #1C1C22; */
@@ -165,11 +164,11 @@ h1 {
 }
 
 .unFavorite:hover {
-  background-image: url(../images/full_star.svg);
+  background-image: url(images/full_star.svg);
 }
 
 .favorite {
-  background-image: url(../images/full_star.svg);
+  background-image: url(images/full_star.svg);
 }
 
 .addATask-button {
@@ -178,7 +177,6 @@ h1 {
   height: 60px;
   width: 98%;
   background-color: #E96330;
-  color: white;
   margin: auto;
   margin-top: 10px;
   box-shadow: 1px 1px 4px #1C1C22;
@@ -189,7 +187,7 @@ h1 {
 #addATaskBtn  {
   width: 40px;
   height: 40px;
-  background-image: url(../images/add.svg);
+  background-image: url(images/add.svg);
   background-repeat: no-repeat;
   background-size: cover;
   /* box-shadow: 1px 1px 4px #1C1C22; */
@@ -218,7 +216,7 @@ h1 {
 .closeBtn  {
   height: 50px;
   width: 50px;
-  background-image: url(../images/close_menu.svg);
+  background-image: url(images/close_menu.svg);
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 1px 1px 4px #1C1C22;
@@ -253,7 +251,7 @@ h1 {
   height: 40px;
   width: 40px;
   background-color: #ffaa4d;
-  background-image: url(../images/add.svg);
+  background-image: url(images/add.svg);
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
@@ -285,7 +283,7 @@ h1 {
   height: 50px;
   width: 50px;
   background-color: #e96330;
-  background-image: url(../images/delete.svg);
+  background-image: url(images/delete.svg);
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
@@ -300,7 +298,7 @@ h1 {
   height: 60px;
   width: 540px;
   background-color: #E96330;
-  color: white;
+  color: #EAEAEA;
   margin: auto;
   box-shadow: 1px 1px 4px #1C1C22;
   align-items: center;
@@ -313,7 +311,7 @@ h1 {
 #logoutBtn  {
   width: 40px;
   height: 40px;
-  background-image: url(../images/logout.svg);
+  background-image: url(images/logout.svg);
   background-size: cover;
   border-radius: 20px;
   margin: 5px 40px;
@@ -335,7 +333,7 @@ h1 {
   padding: 0px 5px;
 }
 
-.taskName {
+.taskNameInput {
   width: 480px;
   height: 50px;
   text-indent: 10px;
@@ -356,9 +354,7 @@ h1 {
   height: 50px;
   width: 260px;
   background-color: #FF9344;
-  color: white;
-  margin-bottom: 10px;
-  margin-right: 5px;
+  margin: 1px 5px 10px 5px;
   box-shadow: 1px 1px 4px #1C1C22;
   align-items: center;
   cursor: pointer;
@@ -367,7 +363,7 @@ h1 {
 .taskDoneBtn {
   width: 40px;
   height: 40px;
-  background-image: url(../images/check.svg);
+  background-image: url(images/checkW.svg);
   background-size: cover;
   margin: 5px 10px 5px 40px;
 }
@@ -378,9 +374,7 @@ h1 {
   height: 50px;
   width: 260px;
   background-color: #E96330;
-  color: white;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  margin: 1px 5px 10px 5px;
   box-shadow: 1px 1px 4px #1C1C22;
   align-items: center;
   cursor: pointer;
@@ -389,7 +383,63 @@ h1 {
 .stopTaskBtn {
   width: 40px;
   height: 40px;
-  background-image: url(../images/close_menu.svg);
+  background-image: url(images/close_menu.svg);
+  background-size: cover;
+  margin: 5px 10px 5px 40px;
+}
+
+.startTask-taskDone-buttons {
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  padding-top: 15px;
+  background-color: tomato;
+}
+
+.startTask-button {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  width: 260px;
+  background-color: #FF9344;
+  margin: 1px 5px 10px 5px;
+  box-shadow: 1px 1px 4px #1C1C22;
+  align-items: center;
+  cursor: pointer;
+}
+
+.startTaskBtn {
+  width: 40px;
+  height: 40px;
+  background-image: url(images/start.svg);
+  background-size: cover;
+  margin: 5px 10px 5px 40px;
+}
+
+.reStartTask-button {
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  padding-top: 15px;
+  background-color: tomato;
+}
+
+.reStartTask {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  width: 260px;
+  background-color: #FF9344;
+  margin: 1px 5px 10px 5px;
+  box-shadow: 1px 1px 4px #1C1C22;
+  align-items: center;
+  cursor: pointer;
+}
+
+.reStartTaskBtn {
+  width: 40px;
+  height: 40px;
+  background-image: url(images/undone.svg);
   background-size: cover;
   margin: 5px 10px 5px 40px;
 }
@@ -398,7 +448,6 @@ h1 {
   /* display: flex; */
   padding: 1px 20px;
   background-color: tomato;
-
 }
 
 .form-new-task div {
@@ -442,7 +491,6 @@ h1 {
   height: 60px;
   width: 560px;
   background-color: #FE8F46;
-  color: white;
   margin: auto;
   margin-bottom: 10px;
   box-shadow: 1px 1px 4px #1C1C22;
@@ -453,7 +501,7 @@ h1 {
 .saveBtn {
   width: 40px;
   height: 40px;
-  background-image: url(../images/save.svg);
+  background-image: url(images/save.svg);
   background-size: cover;
   border-radius: 20px;
   margin: 5px 40px;
@@ -465,7 +513,6 @@ h1 {
   height: 60px;
   width: 560px;
   background-color: #FFC864;
-  color: white;
   margin: auto;
   margin-bottom: 10px;
   box-shadow: 1px 1px 4px #1C1C22;
@@ -476,7 +523,7 @@ h1 {
 .cancelBtn {
   width: 40px;
   height: 40px;
-  background-image: url(../images/close_menu.svg);
+  background-image: url(images/close_menu.svg);
   background-size: cover;
   border-radius: 20px;
   margin: 5px 40px;
@@ -489,7 +536,6 @@ h1 {
   height: 60px;
   width: 560px;
   background-color: #e96330;
-  color: white;
   margin: auto;
   box-shadow: 1px 1px 4px #1C1C22;
   align-items: center;
@@ -499,7 +545,7 @@ h1 {
 .deleteBtn {
   width: 40px;
   height: 40px;
-  background-image: url(../images/delete.svg);
+  background-image: url(images/delete.svg);
   background-size: cover;
   margin: 5px 40px;
 }
