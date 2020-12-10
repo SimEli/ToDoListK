@@ -76,7 +76,7 @@ form {
   padding-right: 15px;
 }
 
-#menuBtn  {
+.menuBtn  {
   height: 50px;
   width: 50px;
   background-image: url(images/menu.svg);
