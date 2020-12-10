@@ -13,19 +13,11 @@
     <div class="container-home">
       <h1 class="welcome-title">Welcome on TO DO LIST</h1>
       <form action="" method="">
-          <p>
-            <input type="text" placeholder="Username" name="uname" >
-          </p>
-          <p>
-            <input type="password" placeholder="Password" name="psw" >
-          </p>
-          <p>
-            <input class="submit" type="submit" value="Login">
-          </p>
-          <p>
-            <input class="submit" type="submit" value="Sign in with Google">
-          </p>
-        </form>
+        <input type="text" placeholder="Username" name="uname" required>          
+        <input type="password" placeholder="Password" name="psw" required>          
+        <input class="submit" type="submit" value="Login">          
+        <input class="submit" type="submit" value="Sign in with Google">
+      </form>
         <button id="enter">TEST</button>
     </div>
 
@@ -124,7 +116,10 @@
           </div>
           <div>
             <label for="list">List</label>
-            <select name="list" id="list" placeholder="Select a list here"></select>
+            <select name="list" id="list" placeholder="Select a list here">
+              <option value="MFL">My first List</option>
+              <option value="MSL">My second List</option>
+            </select>
           </div>
           <div>
             <label for="startDate">Start Date</label>
@@ -135,6 +130,7 @@
             <input type="date" name="deadline" id="deadline">
           </div>
           <p class="remainingTime-display">remainingTime-display</p>
+          <div class="message"></div>
         <!-- </form> -->
       </div>
       <div class="save-cancel-delete-buttons">

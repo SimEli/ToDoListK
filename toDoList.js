@@ -37,6 +37,8 @@ $(document).ready(function(){
     $('.taskNameInput').val('');
     $(".taskDone-stopTask-buttons").removeClass("displayed");
     $(".delete-button").removeClass("displayed");
+    $(".startTask-taskDone-buttons").removeClass("displayed");
+    $(".reStartTask-button").removeClass("displayed");
   });
 
   // Click on Task Button, go to Edit task
@@ -129,7 +131,7 @@ $(document).ready(function(){
         $(".taskDone-stopTask-buttons").removeClass("displayed");
         $(".delete-button").removeClass("displayed");
 
-      } else alert("Enter some text!")
+      } else $('.taskNameInput').focus();
       // clear the taskNameInput input after entry 
       $('.taskNameInput').val('');
     });
@@ -146,12 +148,12 @@ $(document).ready(function(){
       e.preventDefault();
       var text = $('.listName').val();
       if (text.length != 0) {
-      $list.append(`
-      <div class="list-button">
-        <div class="list-name"><h3>` + text + `</h3></div>
-        <div class="delete-list-button"></div>
-      </div>`);
-      } else alert("Enter some text!")
+        $list.append(`
+        <div class="list-button">
+          <div class="list-name"><h3>` + text + `</h3></div>
+          <div class="delete-list-button"></div>
+        </div>`);
+      } else $('.listName').focus();
       
       $('.listName').val('');
     }); 
