@@ -16,7 +16,7 @@ function on_init_lists(){
   $('#login_container,#loginTitle').hide();
   $('body').html(paint_containers());
     event_handlers();
-  $(".container-main").toggle();
+  $(".container-main").show();
   // alert('yoo');
 }
 
