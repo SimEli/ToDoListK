@@ -1,6 +1,6 @@
-var LinkedIn_data={}
-var google_data={}
-var facebook_data={}
+// var LinkedIn_data={}
+// var google_data={}
+// var facebook_data={}
 
 $(document).ready(function(){
     checkLogin();
@@ -16,8 +16,7 @@ function on_init_lists(){
   $('#login_container,#loginTitle').hide();
   $('body').html(paint_containers());
     event_handlers();
-  $(".container-main").show();
-  // alert('yoo');
+    loadingAllMyTasks();
 }
 
 function paint_containers() {
@@ -32,17 +31,6 @@ function paint_containers() {
     </div>
       <div class="task-list">
         <div class="list-of-task">
-          <div class="task-button"> 
-            <div class="check-task_name-onLeft">
-              <div class="uncheckedBtn"></div>
-              <div class="task-name"><h1>My first Task</h1>
-              </div>
-            </div>
-            <div class="deadline-favorite-onRight">
-              <div class="deadlineBtn" title="Remaining Time : 1s"></div>
-              <div class="unFavorite"></div>
-            </div>
-          </div>
         </div>
         <div class="addATask-button">
           <h2 class="title">Add a Task</h2>
@@ -65,7 +53,7 @@ function paint_containers() {
         </div>
         <div class="list-of-list">
           <div class="list-button">
-            <div class="list-name"><h3>testList</h3></div>
+            <div class="list-name"><h3>testList nested in html</h3></div>
             <div class="delete-list-button"></div>
           </div>
         </div>
@@ -111,25 +99,24 @@ function paint_containers() {
       </div>
     </div>
     <div class="form-new-task">
-      <!-- <form action="" method="post"> -->
         <div>
           <label for="description">Description</label>
-          <input type="text" name="description" id="description" placeholder="task description">
+          <input type="text" name="description" class="descriptionInput" placeholder="task description">
         </div>
         <div>
           <label for="list">List</label>
-          <select name="list" id="list" placeholder="Select a list here">
+          <select name="list" class="list" placeholder="Select a list here">
             <option value="MFL">My first List</option>
             <option value="MSL">My second List</option>
           </select>
         </div>
         <div>
           <label for="startDate">Start Date</label>
-          <input type="date" name="startDate" id="startDate">
+          <input type="date" name="startDate" class="startDateInput">
         </div>
         <div>
           <label for="deadline">Deadline</label>
-          <input type="date" name="deadline" id="deadline">
+          <input type="date" name="deadline" class="deadlineInput">
         </div>
         <p class="remainingTime-display">remainingTime-display</p>
         <div class="message"></div>
@@ -150,16 +137,10 @@ function paint_containers() {
       </div>
     </div>  
   </div> `
-  
 }
 
 function event_handlers() {
-  // access MAIN via TEST BUTTON
-  // $("#enter").on('click', function(){
-  //   $(".container-main").toggle();
-  //   $(".container-home").hide();
-  // });
-
+  
   // menu button action, go menu
   $(document).on('click', '.menuBtn', function(){
     $(".container-menu").show();
@@ -176,10 +157,7 @@ function event_handlers() {
   $(document).on('click', '.logout-button', function(){
     $(".container-menu").hide();
     $(".container-main").hide();
-    // $("#loginBox").show();
-    // checkLogin();
     logout();
-    // $('body').html('<div id="loginBox"><div id="loginTitle">Welcome on TO DO LIST</div>'+standard_login_container(['google'])+'</div>');
   });
 
   // add Task button action, go to create task
@@ -205,17 +183,68 @@ function event_handlers() {
     $(".container-create").show();
     $(".taskDone-stopTask-buttons").addClass("displayed");
     $(".delete-button").addClass("displayed");
-    var $text = $(this).text();
-    $('.taskNameInput').val($text);
+    var taskId = $(this).parents('[iid]').attr('iid')
+    api.get_item(
+      {
+        'iclass':'task',
+        'iid':taskId
+      },
+      function(data){
+        $('.taskNameInput').val(data[0]['description']);
+        $('.descriptionInput').val(data[0]['task_description']);
+        $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
+        $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
+      }
+    );
     // Delete button action in EDIT
-    // $('.delete-button').on('click', function() {
-    //   $('.task-name').remove();
-    //   $(".container-create").toggle();
-    //   $(".container-main").show();
-    //   $('.taskNameInput').val('');
-    //   $(".taskDone-stopTask-buttons").removeClass("displayed");
-    //   $(".delete-button").removeClass("displayed");
-    // });
+    $('.delete-button').on('click', function() {
+      
+      api.delete_item(
+        {
+          'iclass':'task',
+          'iid':taskId
+        },
+        function(){
+          $(this).parent(".task-button").remove();
+          $(".container-create").hide();
+          init_lists();
+          $('.taskNameInput').val('');
+          $('.descriptionInput').val('');
+          $('.startDateInput').val('');
+          $('.deadlineInput').val('');
+          $(".taskDone-stopTask-buttons").removeClass("displayed");
+          $(".delete-button").removeClass("displayed");
+        }
+      );
+      
+    });
+    // EDIT action and Update it
+    var saveTask = $('.save-button');
+    saveTask.on('click', function() {
+      var task = { 
+        description : $('.taskNameInput').val(),
+        task_description : $('.descriptionInput').val(),
+        start_date : $('.startDateInput').val(),
+        deadline : $('.deadlineInput').val()
+      }
+      api.edit(
+        {
+          'iclass':'task',
+          'iid':taskId
+        },
+        {
+          'changes':{
+            'description': task['description'],
+            'task_description': task['task_description'],
+            // 'favorite': favorite,
+            // 'task_done': taskDone,
+            'start_date': task['start_date'],
+            'deadline': task['deadline']
+          }
+        },
+        $('.task-name').html(paintTask(task))
+      );
+    });
   });
 
   // "Stop task" button action, display the "Start Task" button in place
@@ -271,29 +300,30 @@ function event_handlers() {
   //   $( function() {
   //   $( document ).tooltip();
   // } );
+    var saveTask = $('.save-button');
+    saveTask.on('click', function() {
+      var task = { 
+        description : $('.taskNameInput').val(),
+        task_description : $('.descriptionInput').val(),
+        start_date : $('.startDateInput').val(),
+        deadline : $('.deadlineInput').val()
+      }
 
-  $(function() {
+      if (task['description'].length != 0) { 
 
-    var $task, $saveTask;
-    $task = $('.list-of-task');
-    $saveTask = $('.save-button');
-
-    $saveTask.on('click', function(e) {
-      e.preventDefault();
-      var text = $('.taskNameInput').val();
-      if (text.length != 0) { 
-        $task.append(`
-        <div class="task-button"> 
-          <div class="check-task_name-onLeft">
-            <div class="uncheckedBtn"></div>
-            <div class="task-name"><h1>` + text + `</h1>
-            </div>
-          </div>
-          <div class="deadline-favorite-onRight">
-            <div class="deadlineBtn" title="Remaining Time : 1s"></div>
-            <div class="unFavorite"></div>
-          </div>
-        </div>`
+        api.create_item(
+          {'iclass':'task'},
+          {
+            'changes':{
+              'description': task['description'],
+              'task_description': task['task_description'],
+              // 'favorite': favorite,
+              // 'task_done': taskDone,
+              'start_date': task['start_date'],
+              'deadline': task['deadline']
+            }
+          },
+          $('.list-of-task').html(paintTask(task))
         );
         // Save Create/edit Task button action, go to main
         $(".container-create").hide();
@@ -304,20 +334,20 @@ function event_handlers() {
         $(".reStartTask-button").removeClass("displayed");
 
       } else $('.taskNameInput').focus();
-      // clear the taskNameInput input after entry 
+      // clear Inputs after entry 
       $('.taskNameInput').val('');
+      $('.descriptionInput').val('');
+      $('.startDateInput').val('');
+      $('.deadlineInput').val('');
     });
-  });
 
   // add a List function in menu
   $(function() {
 
-    var $list, $addList;
-    $list = $('.list-of-list');
-    $addList = $('.submit-list');
+    var list = $('.list-of-list');
+    var addList = $('.submit-list');
 
-    $addList.on('click', function(e) {
-      e.preventDefault();
+    addList.on('click', function() {
       var text = $('.listName').val();
       if (text.length != 0) {
 
@@ -328,43 +358,57 @@ function event_handlers() {
               'description': text
               }
           },
-          function(text){
-            $list.append(`
-        <div class="list-button">
-          <div class="list-name"><h3>` + text + `</h3></div>
-          <div class="delete-list-button"></div>
-        </div>`);
-            
+          function(data){
+            list.append('\
+          <div class="list-button" iid="'+data+'">\
+            <div class="list-name"><h3>' + text + '</h3></div>\
+            <div class="delete-list-button"></div>\
+          </div>');
           }
         );
-        // $list.append(`
-        // <div class="list-button">
-        //   <div class="list-name"><h3>` + text + `</h3></div>
-        //   <div class="delete-list-button"></div>
-        // </div>`);
       } else $('.listName').focus();
       
       $('.listName').val('');
     }); 
   });
   
-
-
-  
   // input code above, this below is end of event_handlers functions
 };
+
+// display new task in task list
+function paintTask(task){
+  return ('\
+  <div class="task-button" iid="'+task['id']+'">\
+    <div class="check-task_name-onLeft">\
+      <div class="uncheckedBtn"></div>\
+      <div class="task-name"><h1>' + task['description'] + '</h1></div>\
+    </div>\
+    <div class="deadline-favorite-onRight">\
+      <div class="deadlineBtn" title="Remaining Time : 1s"></div>\
+      <div class="unFavorite"></div>\
+    </div>\
+  </div>');
+}
+
+// main menu with tasks loaded from DB
+function loadingAllMyTasks() {
+  $(".container-main").show();
+  api.search_item(
+    {
+      'iclass':'task',
+      'search':''
+    },
+    {},
+    function(data){
+      for(var i = 0; i < data.length; i++) {
+        $('.list-of-task').append(paintTask(data[i]));
+      }
+    }
+  );
+  }
 
 function hover_check() {
   if(matchMedia('(hover: hover)').matches && matchMedia('(pointer:fine)').matches){
     $('body').addClass('has_hover');
   }
-}
-
-function logout() {
-  alert("check");
-  api.logout(
-    function(){
-      window.location.reload();
-    }
-  );
 }
