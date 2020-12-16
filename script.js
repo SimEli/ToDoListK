@@ -176,8 +176,9 @@ function event_handlers() {
   $(document).on('click', '.logout-button', function(){
     $(".container-menu").hide();
     $(".container-main").hide();
-    $("#loginBox").show();
+    // $("#loginBox").show();
     // checkLogin();
+    logout();
     // $('body').html('<div id="loginBox"><div id="loginTitle">Welcome on TO DO LIST</div>'+standard_login_container(['google'])+'</div>');
   });
 
@@ -257,6 +258,14 @@ function event_handlers() {
   // Delete list button action in Menu
   $(document).on('click', '.delete-list-button', function(){
     $(this).parent(".list-button").remove();
+    // api.delete_item(
+    //   {
+    //     'iclass': $(this).parent(".list-button")
+    //   },
+    //   function(data){
+    //     alert('we have successfully eliminated concept number 1 yay!');
+    //   }
+    // );
   });
   // for deadline tooltip remaining time ?
   //   $( function() {
@@ -311,11 +320,28 @@ function event_handlers() {
       e.preventDefault();
       var text = $('.listName').val();
       if (text.length != 0) {
-        $list.append(`
+
+        api.create_item(
+          {'iclass':'list'},
+          {
+            'changes':{
+              'description': text
+              }
+          },
+          function(text){
+            $list.append(`
         <div class="list-button">
           <div class="list-name"><h3>` + text + `</h3></div>
           <div class="delete-list-button"></div>
         </div>`);
+            
+          }
+        );
+        // $list.append(`
+        // <div class="list-button">
+        //   <div class="list-name"><h3>` + text + `</h3></div>
+        //   <div class="delete-list-button"></div>
+        // </div>`);
       } else $('.listName').focus();
       
       $('.listName').val('');
@@ -332,4 +358,13 @@ function hover_check() {
   if(matchMedia('(hover: hover)').matches && matchMedia('(pointer:fine)').matches){
     $('body').addClass('has_hover');
   }
+}
+
+function logout() {
+  alert("check");
+  api.logout(
+    function(){
+      window.location.reload();
+    }
+  );
 }
