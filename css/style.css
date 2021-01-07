@@ -183,38 +183,39 @@ h2 {
   /* background-color: #CF0E22; */
 }
 
-/* unFavorite applies also in create/edit Menu */
-.unFavorite {
+.favorite[fav="f"], .favorite[fav="t"] {
   height: 40px;
   width: 40px;
   background-image: url(images/empty_star.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  /* box-shadow: 1px 1px 4px #1C1C22; */
   cursor: pointer;
   margin-right: 10px;
 }
 
-.unFavorite:hover {
+.favorite[fav="t"] {
   background-image: url(images/full_star.svg);
 }
 
-.create-unFavorite {
+.favorite:hover {
+  background-image: url(images/full_star.svg);
+}
+
+.create-favorite[fav="f"], .create-favorite[fav="t"] {
   height: 40px;
   width: 40px;
   background-image: url(images/empty_star.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  /* box-shadow: 1px 1px 4px #1C1C22; */
   cursor: pointer;
   margin-right: 10px;
 }
 
-.create-unFavorite:hover {
+.create-favorite[fav="t"] {
   background-image: url(images/full_star.svg);
 }
 
-.favorite {
+.create-favorite:hover {
   background-image: url(images/full_star.svg);
 }
 
