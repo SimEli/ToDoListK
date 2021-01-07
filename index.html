@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, user-scalable=no">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+    crossorigin="anonymous"></script>
     <script src="https://www.warpcore.io/generic/allow/js/lib/jquery-1.11.1.min.js"></script>
     <script src="https://www.warpcore.io/generic/allow/js/lib/jquery.tablesorter.min.js"></script>
     <script src="https://www.warpcore.io/generic/allow/js/lib/jquery.validate.js"></script>
@@ -29,17 +32,32 @@
     <script src="https://www.warpcore.io/generic/allow/js/uploader.js"></script>
     <script src="https://www.warpcore.io/generic/allow/js/radar_chart.js"></script>
     <script src="https://www.warpcore.io/generic/allow/js/relation_tab.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-    crossorigin="anonymous"></script>
     <script src='config.js'></script>
     <script src='script.js' type="text/javascript"></script>
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="https://www.warpcore.io/generic/allow/img/favicon.ico" type="image/x-icon">
     <!-- <link rel='icon' href='/css/images/list.ico' type='image/x-icon'> -->
-  <title>TO DO LIST</title>
+  <title>toDoListAppSimon</title>
   </head>
   <body>  
   </body>
 </html>
+
+<!-- check for load all tasks list for DB at each refresh, and how to get an item to edit, -->
+
+<!-- change input date for "datetime" ?  and remove split in edit task -->
+
+<!-- $('.taskNameInput').val('');
+    $('.descriptionInput').val('');
+    $('.startDateInput').val('');
+    $('.deadlineInput').val(''); -->
+    <!-- can i add a class 'taskInput for each input' and
+    just use taskInput.val'' to reduce 4 lines in one ? -->
+<!-- idem below -->
+    <!-- $(".taskDone-stopTask-buttons").removeClass("displayed");
+    $(".delete-button").removeClass("displayed");
+    $(".startTask-taskDone-buttons").removeClass("displayed");
+    $(".reStartTask-button").removeClass("displayed"); -->
+
+    <!-- bug when delete, loadingAllMyTasks too much times but when refreshing it's ok -->

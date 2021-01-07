@@ -199,6 +199,21 @@ h2 {
   background-image: url(images/full_star.svg);
 }
 
+.create-unFavorite {
+  height: 40px;
+  width: 40px;
+  background-image: url(images/empty_star.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* box-shadow: 1px 1px 4px #1C1C22; */
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.create-unFavorite:hover {
+  background-image: url(images/full_star.svg);
+}
+
 .favorite {
   background-image: url(images/full_star.svg);
 }
@@ -497,6 +512,7 @@ h2 {
   width: 400px;
   text-indent: 5px;
   font-family: 'Raleway', sans-serif;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
@@ -505,6 +521,7 @@ h2 {
   width: 400px;
   text-indent: 5px;
   font-family: 'Raleway', sans-serif;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
@@ -513,6 +530,7 @@ h2 {
   width: 400px;
   text-indent: 5px;
   font-family: 'Raleway', sans-serif;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
