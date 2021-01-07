@@ -1,7 +1,3 @@
-// var LinkedIn_data={}
-// var google_data={}
-// var facebook_data={}
-
 $(document).ready(function(){
     checkLogin();
     $('body').html('<div id="loginBox"><div id="loginTitle">Welcome on TO DO LIST</div>'+standard_login_container(['google'])+'</div>');
@@ -64,7 +60,7 @@ function paint_containers() {
   <div class="container-create">\
     <div class="title-create-bar">\
       <input type="text" name="taskName" class="taskNameInput newTaskInput" placeholder="Task Name">\
-      <div class="create-unFavorite"></div>\
+      <div class="create-favorite" fav="f"></div>\
     </div>\
     <div class="taskDone-stopTask-buttons edition-buttons">\
       <div class="taskDone-button">\
@@ -167,9 +163,6 @@ function event_handlers() {
     $('.edition-buttons').removeClass('displayed');
     $('.save-button').removeClass('edit-task');
     $('.save-button').removeClass('save-new-task');
-    $('.unFavorite').removeClass('favorite');
-    $('.create-unFavorite').removeClass('favorite');
-
   });
 
   // Click on Task Button, go to Edit task
@@ -179,7 +172,7 @@ function event_handlers() {
     $('.taskDone-stopTask-buttons').addClass('displayed');
     $('.delete-button').addClass('displayed');
     $('.save-button').addClass('edit-task');
-    var taskId = $(this).parents('[iid]').attr('iid')
+    var taskId = $(this).parents('[iid]').attr('iid');
     console.log(taskId);
     getTaskAPI(taskId);
     // Save button action in EDIT MODE
@@ -190,7 +183,7 @@ function event_handlers() {
         task_description: $('.descriptionInput').val(),
         start_date: $('.startDateInput').val(),
         deadline: $('.deadlineInput').val(),
-        favorite: $('.create-unFavorite').hasClass('favorite')
+        favorite: ($('.create-favorite').attr('fav'))
       };
       editTaskAPI(taskId, task);
     });
@@ -232,18 +225,37 @@ function event_handlers() {
   });
 
   // Favorite Button action click on task list
-  $(document).on('click', '.unFavorite', function(){
-    $(this).toggleClass("favorite");
+  $(document).on('click', '.favorite', function(){
+    var o={'t':'f','f':'t'}
+    var val=$(this).attr('fav')
+
+    var new_val=o[val]
+
+    console.log(new_val);
+    $(this).attr('fav',new_val)
+
+    var taskId = $(this).parents('[iid]').attr('iid');
+    // var task = {
+    //   description: $(this).parents('.task-name').text(),
+    //   favorite: ($('.favorite').attr('fav'))
+    // };
+    editOnClickFavoriteButtonAPI(taskId, new_val);
   });
 
 // Favorite Button action click on Create Menu
-$(document).on('click', '.create-unFavorite', function(){
-  $(this).toggleClass("favorite");
-});
+  $(document).on('click', '.create-favorite', function(){
+    var o={'t':'f','f':'t'}
+    var val=$(this).attr('fav')
+
+    var new_val=o[val]
+
+    console.log(new_val);
+    $(this).attr('fav',new_val)
+  });
 
   // Delete list button action in Menu
   $(document).on('click', '.delete-list-button', function(){
-    var taskId = $(this).parents('[iid]').attr('iid')
+    var taskId = $(this).parents('[iid]').attr('iid');
     console.log(taskId);
     deleteListAPI(taskId);
   });
@@ -255,15 +267,15 @@ $(document).on('click', '.create-unFavorite', function(){
       task_description: $('.descriptionInput').val(),
       start_date: $('.startDateInput').val(),
       deadline: $('.deadlineInput').val(),
-      favorite: ($('.create-unFavorite').hasClass('favorite') ? true : false)
+      favorite: ($('.create-favorite').attr('fav'))
     };
-    console.log(task['favorite']);
+    // console.log(task['favorite']);
     if (task['description'].length != 0) {
       createTaskAPI(task);
-      alert("here");
     } else $('.taskNameInput').focus();
     // clear Inputs after entry 
     $('.newTaskInput').val('');
+    $('.create-favorite').attr('fav', 'f');
   });
 
   // add a List function in menu
@@ -274,7 +286,6 @@ $(document).on('click', '.create-unFavorite', function(){
     } else $('.listName').focus();
     $('.listName').val('');
   });
-  
   //this below is end of event_handlers functions
 };
 
@@ -307,8 +318,7 @@ function createTaskAPI(task) {
     }, function (taskId) {
       task['id'] = taskId;
       $('.list-of-task').append(paintTask(task));
-      console.log(task['favorite']);
-      task['favorite'] ? $('.unFavorite').addClass('favorite') : "";
+      // console.log(task['favorite']);
       $('.container-create').hide();
       $('.container-main').show();
       $('.save-button').removeClass('save-new-task');
@@ -334,7 +344,6 @@ function editTaskAPI(taskId, task) {
     }, function (taskId) {
       task['id'] = taskId;
       $('.list-of-task').children('[iid="' + taskId + '"]').replaceWith(paintTask(task));
-      (task['favorite']) ? $('.unFavorite').addClass('favorite') : $('.unFavorite').removeClass('favorite');
       $('.container-create').hide();
       $('.container-main').show();
       $('.edition-buttons').removeClass('displayed');
@@ -353,8 +362,7 @@ function getTaskAPI(taskId) {
       $('.taskNameInput').val(data[0]['description']);
       $('.descriptionInput').val(data[0]['task_description']);
       console.log(data[0]['favorite']);
-      (data[0]['favorite']) ? $('.create-unFavorite').addClass('favorite') : $('.unFavorite').removeClass('favorite');
-      // if (data[0]['favorite']) $('.unFavorite').addClass('favorite');
+      ($('.create-favorite').attr('fav', data[0]['favorite']));
       $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
       $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
     }
@@ -370,7 +378,6 @@ function deleteTaskAPI(taskId) {
     function () {
       $('.task-name').parents('[iid="' + taskId + '"]').remove();
       $('.container-create').hide();
-      // loadingAllMyTasks();
       $('.container-main').show();
       $('.newTaskInput').val('');
       $('.edition-buttons').removeClass('displayed');
@@ -391,6 +398,22 @@ function deleteListAPI(taskId) {
   );
 }
 
+function editOnClickFavoriteButtonAPI(taskId, value) {
+  api.edit(
+    {
+      'iclass': 'task',
+      'iid': taskId
+    },
+    {
+      'changes': {
+        'favorite': value
+      }
+    }, function (taskId) {
+    // $(this).attr('fav',new_val)
+    }
+  );
+}
+
 // main menu with tasks loaded from DB
 function loadingAllMyTasks() {
   $(".container-main").show();
@@ -403,8 +426,6 @@ function loadingAllMyTasks() {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));
-        console.log(data[i]['favorite']);
-        (data[0]['favorite']) ? $('.unFavorite').addClass('favorite') : $('.unFavorite').removeClass('favorite');
       }
     }
   );
@@ -420,7 +441,7 @@ function paintTask(task){
     </div>\
     <div class="deadline-favorite-onRight">\
       <div class="deadlineBtn" title="Remaining Time : 1s"></div>\
-      <div class="unFavorite"></div>\
+      <div class="favorite" fav="'+task['favorite']+'"></div>\
     </div>\
   </div>');
 };
