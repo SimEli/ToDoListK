@@ -130,24 +130,31 @@ h2 {
   box-shadow: 1px 1px 4px #1C1C22;
 }
 
-.uncheckedBtn {
+.task-button[status="notStarted"] .taskStatus, .task-button[status="started"] .taskStatus, .task-button[status="done"] .taskStatus {
   height: 40px;
   width: 40px;
   background-image: url(images/not_check.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  /* box-shadow: 1px 1px 4px #1C1C22; */
   cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.uncheckedBtn:hover {
+.task-button .taskStatus:hover {
   background-image: url(images/check.svg);
 }
 
-.checked {
+.task-button[status="done"] .taskStatus {
   background-image: url(images/check.svg);
+}
+
+.task-button[status="done"]{
+  background-color: whitesmoke;
+}
+
+.task-button[status="started"] {
+  background-color: #ffe75e;
 }
 
 .task-name {  
