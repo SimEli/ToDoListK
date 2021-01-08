@@ -1,12 +1,6 @@
 
     * change input date for "datetime" ?  and remove split in edit task
 
-    $(".taskDone-stopTask-buttons").removeClass("displayed");
-    $(".delete-button").removeClass("displayed");
-    $(".startTask-taskDone-buttons").removeClass("displayed");
-    $(".reStartTask-button").removeClass("displayed");
-
-
     * attr for CHECKED = sstarted stopped or done. default = not    started
     color for status of each tasks
     --> whitesmoke for "done" = weird
@@ -22,3 +16,7 @@
 OK  * add attr IID in edit mode to use for edit delete tasks and also for check ?
 
 possible to put iid in save btn in place of edittask btn and then delete no need class edittask btn, just check if an iid attr is on save btn then it's an edit mode, if no iid or iid=null then it's save (new one)
+
+enlever tous les displays flex ! et mettre position absolute et relative partout.
+
+date check fct today

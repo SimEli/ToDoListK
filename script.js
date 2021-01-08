@@ -62,7 +62,7 @@ function paint_containers() {
       <input type="text" name="taskName" class="taskNameInput newTaskInput" placeholder="Task Name">\
       <div class="create-favorite" fav="f"></div>\
     </div>\
-    <div class="taskDone-stopTask-buttons edition-buttons">\
+    <div class="taskDone-stopTask-buttons buttonsStatus" status="started">\
       <div class="taskDone-button">\
         <h2 class="title">Task Done</h2>\
         <div class="taskDoneBtn"></div>\
@@ -72,7 +72,7 @@ function paint_containers() {
         <div class="stopTaskBtn"></div>\
       </div>\
     </div>\
-    <div class="startTask-taskDone-buttons edition-buttons">\
+    <div class="startTask-taskDone-buttons buttonsStatus" status="unStarted">\
       <div class="startTask-button">\
         <h2 class="title">Start Task</h2>\
         <div class="startTaskBtn"></div>\
@@ -82,13 +82,13 @@ function paint_containers() {
         <div class="taskDoneBtn"></div>\
       </div>\
     </div>\
-    <div class="reStartTask-button edition-buttons">\
+    <div class="reStartTask-button buttonsStatus" status="done">\
       <div class="reStartTask">\
         <h2 class="title">Restart Task</h2>\
         <div class="reStartTaskBtn"></div>\
       </div>\
     </div>\
-    <div class="form-new-task">\
+    <div class="form-task">\
         <div>\
           <label for="description">Description</label>\
           <input type="text" name="description" class="descriptionInput newTaskInput" placeholder="task description">\
@@ -121,7 +121,7 @@ function paint_containers() {
         <h2 class="title">Cancel</h2>\
         <div class="cancelBtn"></div>\
       </div>\
-      <div class="delete-button edition-buttons">\
+      <div class="delete-button">\
         <h2 class="title">Delete</h2>\
         <div class="deleteBtn"></div>\
       </div>\
@@ -160,7 +160,8 @@ function event_handlers() {
     $('.container-create').hide();
     $('.container-main').show();
     $('.newTaskInput').val('');
-    $('.edition-buttons').removeClass('displayed');
+    $('.buttonsStatus').hide();
+    $('.delete-button').removeClass('displayed');
     $('.save-button').removeAttr('iid');
     $('.save-button').removeClass('edit-task');
     $('.save-button').removeClass('save-new-task');
@@ -168,19 +169,14 @@ function event_handlers() {
 
   // Click on Task Button, go to Edit task
   $(document).on('click', '.task-name', function(){
-    $('.container-main').hide();
-    $('.container-create').show();
-    $('.startTask-taskDone-buttons').addClass('displayed');
-    $('.delete-button').addClass('displayed');
-    $('.save-button').addClass('edit-task');
     var taskId = $(this).parents('[iid]').attr('iid');
     console.log(taskId);
-    ($('.edit-task').attr('iid', taskId));
-
+    $('.container-main').hide();
+    $('.container-create').show();
+    $('.delete-button').addClass('displayed');
+    $('.save-button').addClass('edit-task');
+    // line below change and put iid on save and check if id !=ull = edit mode
     getTaskAPI(taskId);
-    if (task['status'].length != 0) {
-      createTaskAPI(task);
-    } else $('.taskNameInput').focus();
   });
 
   // Save button action in EDIT MODE
@@ -192,7 +188,8 @@ function event_handlers() {
       task_description: $('.descriptionInput').val(),
       start_date: $('.startDateInput').val(),
       deadline: $('.deadlineInput').val(),
-      favorite: ($('.create-favorite').attr('fav'))
+      favorite: $('.create-favorite').attr('fav'),
+      status: $('.form-task').attr('status')
     };
     editTaskAPI(taskId, task);
   });
@@ -225,10 +222,15 @@ function event_handlers() {
 
   // 'Start Task' button action, display 'Stop task' button in place
   $(document).on('click', '.startTask-button', function(){
-    $('.startTask-taskDone-buttons').removeClass('displayed');
-    $('.taskDone-stopTask-buttons').addClass('displayed');
+    var taskId = $(this).parents('[iid]').attr('iid');
+    var task = {
+      favorite: $(this).parents('[status]').attr('status')
+    };
+    editTaskAPI(taskId, task);
+    var status = task['favorite'];
+    switchButtonsStatus(status);
   });
-
+PEINDRE ID SUR FORM TASK ET PAS SUR EDIT OU SAVE
   // Check Button action click on task list
   $(document).on('click', '.taskStatus', function(){
     var o={'notStarted':'done','done':'notStarted', 'started':'done'};
@@ -362,7 +364,8 @@ function editTaskAPI(taskId, task) {
       $('.list-of-task').children('[iid="' + taskId + '"]').replaceWith(paintTask(task));
       $('.container-create').hide();
       $('.container-main').show();
-      $('.edition-buttons').removeClass('displayed');
+      $('.delete-button').removeClass('displayed');
+      $('.buttonsStatus').hide();
       $('.save-button').removeAttr('iid');
       $('.save-button').removeClass('edit-task');
     }
@@ -376,13 +379,32 @@ function getTaskAPI(taskId) {
       'iid': taskId
     },
     function (data) {
+      $('.edit-task').attr('iid', data[0]['id']);
       $('.taskNameInput').val(data[0]['description']);
       $('.descriptionInput').val(data[0]['task_description']);
       $('.create-favorite').attr('fav', data[0]['favorite']);
-      $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
-      $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
+      $('.form-task').attr('status', data[0]['status']);
+      console.log(data[0]['status']);
+      var status = (data[0]['status']);
+      switchButtonsStatus(status);
+      // $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
+      // $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
     }
   );
+}
+
+function switchButtonsStatus(status) {
+  switch (status) {
+    case 'started':
+      $('.taskDone-stopTask-buttons').show();
+      break;
+    case 'done':
+      $('.reStartTask-button').show();
+      break;
+    default:
+      $('.startTask-taskDone-buttons').show();
+      break;
+  }
 }
 
 function deleteTaskAPI(taskId) {
@@ -396,7 +418,8 @@ function deleteTaskAPI(taskId) {
       $('.container-create').hide();
       $('.container-main').show();
       $('.newTaskInput').val('');
-      $('.edition-buttons').removeClass('displayed');
+      $('.buttonsStatus').hide();
+      $('.delete-button').removeClass('displayed');
       $('.save-button').removeAttr('iid');
       $('.save-button').removeClass('edit-task');
     }

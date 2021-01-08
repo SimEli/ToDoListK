@@ -13,10 +13,10 @@ html, body {
   margin:0;
   font-family: 'Raleway', sans-serif;
 }
-
+/* 
 body {
   display:flex;
-}
+} */
 
 h1 {
   font-size: 22.5px;
@@ -164,17 +164,10 @@ h2 {
   width: auto;
 }
 
-.check-task_name-onLeft {
+.check-task_name-onLeft, .deadline-favorite-onRight {
   display: flex;
   align-items: center;
   padding-left: 5px;
-  height: 60px;
-}
-
-.deadline-favorite-onRight {
-  display: flex;
-  align-items: center;
-  padding-right: 5px;
   height: 60px;
 }
 
@@ -447,7 +440,6 @@ h2 {
 
 .startTask-taskDone-buttons {
   display: none;
-  /* display: flex; */
   justify-content: center;
   padding-top: 15px;
   background-color: #F9803B;
@@ -475,7 +467,6 @@ h2 {
 
 .reStartTask-button {
   display: none;
-  /* display: flex; */
   justify-content: center;
   padding-top: 15px;
   background-color: #F9803B;
@@ -501,13 +492,12 @@ h2 {
   margin: 5px 10px 5px 40px;
 }
 
-.form-new-task {
-  /* display: flex; */
+.form-task {
   padding: 1px 20px;
   background-color: #F9803B;
 }
 
-.form-new-task div {
+.form-task div {
   display: flex;
   margin: auto;
   margin-top: 10px;
@@ -515,7 +505,7 @@ h2 {
   align-items: center;
 }
 
-.form-new-task input[type='text'] {
+.form-task input[type='text'] {
   height: 50px;
   width: 400px;
   text-indent: 5px;
@@ -524,7 +514,7 @@ h2 {
   box-sizing: border-box;
 }
 
-.form-new-task select {
+.form-task select {
   height: 50px;
   width: 400px;
   text-indent: 5px;
@@ -533,7 +523,7 @@ h2 {
   box-sizing: border-box;
 }
 
-.form-new-task input[type='date'] {
+.form-task input[type='date'] {
   height: 50px;
   width: 400px;
   text-indent: 5px;
@@ -601,7 +591,6 @@ h2 {
 
 .delete-button {
   display: none;
-  /* display: flex; */
   justify-content: space-between;
   height: 60px;
   width: 560px;
