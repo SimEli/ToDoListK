@@ -4,6 +4,7 @@
     -->  var o={'notStarted':'done','done':'notStarted', 'started':'done'}; check if OK, on click when started = done but on reclick = notStarted (need to go in edit mode and restart task)
 
     * ! CSS for tooltip ! and tooltip remaining time
+    check color and background color tooltip
 
     * relations between lists and tasks and in selection list 
       lists = all my tasks with number (array.length)
@@ -11,8 +12,6 @@
       when click on a list, display "all my tasks" or the clicked named list which all her tasks
 
 enlever tous les displays flex ! et mettre position absolute et relative partout.
-
-date check fct today
 
 check .buttonsStatus éliminer, faire un check if idd null alors rien ou switchButtonsStatus !! + button delete displayed
 
@@ -52,6 +51,9 @@ check .buttonsStatus éliminer, faire un check if idd null alors rien ou switchB
 
   .closest()
 
+---------------------------------
+editStatusOfTask()
+
   var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -66,6 +68,11 @@ put this variable in global scope, OK but not the "this" !
 maybe check with a case switch for start stop and restart and done btn ?
 
 https://stackoverflow.com/questions/34841300/switch-statement-in-jquery-click-handler
+---------------------------------------------------
 
 change paint_containers method and remove all display:none ! check with attr "state" to show or hide, or with a function acting on the selector
 $(.container- + value +) ?? or 3 function paintcontaienrs ? menu main create ? OR container-menu.siblings.not(tata).hide ?
+
+bug with close and menu button LOADING ALL MY LIST load and load again
+
+to display or not a div, play with class or attr and opacity !
