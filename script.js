@@ -62,28 +62,28 @@ function paint_containers() {
       <input type="text" name="taskName" class="taskNameInput newTaskInput" placeholder="Task Name">\
       <div class="create-favorite" fav="f"></div>\
     </div>\
-    <div class="taskDone-stopTask-buttons buttonsStatus" status="started">\
-      <div class="taskDone-button">\
+    <div class="taskDone-stopTask-buttons buttonsStatus">\
+      <div class="taskDone-button" status="done">\
         <h2 class="title">Task Done</h2>\
         <div class="taskDoneBtn"></div>\
       </div>\
-      <div class="stopTask-button">\
+      <div class="stopTask-button" status="notStarted">\
         <h2 class="title">Stop Task</h2>\
         <div class="stopTaskBtn"></div>\
       </div>\
     </div>\
-    <div class="startTask-taskDone-buttons buttonsStatus" status="unStarted">\
-      <div class="startTask-button">\
+    <div class="startTask-taskDone-buttons buttonsStatus">\
+      <div class="startTask-button" status="started">\
         <h2 class="title">Start Task</h2>\
         <div class="startTaskBtn"></div>\
       </div>\
-      <div class="taskDone-button">\
+      <div class="taskDone-button" status="done">\
         <h2 class="title">Task Done</h2>\
         <div class="taskDoneBtn"></div>\
       </div>\
     </div>\
-    <div class="reStartTask-button buttonsStatus" status="done">\
-      <div class="reStartTask">\
+    <div class="reStartTask-button buttonsStatus">\
+      <div class="reStartTask" status="started">\
         <h2 class="title">Restart Task</h2>\
         <div class="reStartTaskBtn"></div>\
       </div>\
@@ -152,7 +152,7 @@ function event_handlers() {
   $(document).on('click', '.addATask-button', function(){
     $('.container-main').hide();
     $('.container-create').show();
-    $('.save-button').addClass('save-new-task');
+    $('.form-task').attr({'iid': 'null', 'status': 'notStarted'}); //check in API
   });
 
   // Cancel Create/edit Task button action, go to main
@@ -162,9 +162,7 @@ function event_handlers() {
     $('.newTaskInput').val('');
     $('.buttonsStatus').hide();
     $('.delete-button').removeClass('displayed');
-    $('.save-button').removeAttr('iid');
-    $('.save-button').removeClass('edit-task');
-    $('.save-button').removeClass('save-new-task');
+    $('.form-task').attr({'iid': 'null', 'status': 'notStarted'});
   });
 
   // Click on Task Button, go to Edit task
@@ -174,63 +172,97 @@ function event_handlers() {
     $('.container-main').hide();
     $('.container-create').show();
     $('.delete-button').addClass('displayed');
-    $('.save-button').addClass('edit-task');
-    // line below change and put iid on save and check if id !=ull = edit mode
     getTaskAPI(taskId);
-  });
+//     let date_ob = new Date();
 
-  // Save button action in EDIT MODE
-  $(document).on('click', '.edit-task', function() {
-    var taskId = $(this).attr('iid');
-    console.log(taskId);
-    var task = {
-      description: $('.taskNameInput').val(),
-      task_description: $('.descriptionInput').val(),
-      start_date: $('.startDateInput').val(),
-      deadline: $('.deadlineInput').val(),
-      favorite: $('.create-favorite').attr('fav'),
-      status: $('.form-task').attr('status')
-    };
-    editTaskAPI(taskId, task);
+// // adjust 0 before single digit date
+// let date = ("0" + date_ob.getDate()).slice(-2);
+
+// // current month
+// let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+// // current year
+// let year = date_ob.getFullYear();
+
+// // prints date in YYYY-MM-DD format
+// console.log(year + "-" + month + "-" + date);
   });
 
   // Delete button action in EDIT
   $(document).on('click', '.delete-button', function() {
-    var taskId = $(this).siblings('[iid]').attr('iid');
+    var taskId = $('div').filter('div.form-task').attr('iid');
     console.log(taskId);
     deleteTaskAPI(taskId);
   });
 
   // "Stop task" button action, display the "Start Task" button in place
   $(document).on('click', '.stopTask-button', function(){
-    $('.taskDone-stopTask-buttons').removeClass('displayed');
-    $('.startTask-taskDone-buttons').addClass('displayed');
+    var taskId = $('div').filter('div.form-task').attr('iid');
+    // console.log(taskId);
+    var task = {
+      description     : $('.taskNameInput').val(),
+      task_description: $('.descriptionInput').val(),
+      start_date      : $('.startDateInput').val(),
+      deadline        : $('.deadlineInput').val(),
+      favorite        : $('.create-favorite').attr('fav'),
+      status          : $(this).attr('status')
+    };
+    editTaskAPI(taskId, task);
+    var status = task['status'];
+    console.log(status);
   });
 
   // 'task done' button action, display 'ReStart Task' button in place
   $(document).on('click', '.taskDone-button', function(){
-    $('.taskDone-stopTask-buttons').removeClass('displayed');
-    $('.startTask-taskDone-buttons').removeClass('displayed');
-    $('.reStartTask-button').addClass('displayed');
+    var taskId = $('div').filter('div.form-task').attr('iid');
+    // console.log(taskId);
+    var task = {
+      description     : $('.taskNameInput').val(),
+      task_description: $('.descriptionInput').val(),
+      start_date      : $('.startDateInput').val(),
+      deadline        : $('.deadlineInput').val(),
+      favorite        : $('.create-favorite').attr('fav'),
+      status          : $(this).attr('status')
+    };
+    editTaskAPI(taskId, task);
+    var status = task['status'];
+    console.log(status);
   });
 
   // "Restart Task" button action, display "Stop task" button in place
-  $(document).on('click', '.reStartTask-button', function(){
-    $('.reStartTask-button').removeClass('displayed');
-    $('.taskDone-stopTask-buttons').addClass('displayed');
+  $(document).on('click', '.reStartTask', function(){
+    var taskId = $('div').filter('div.form-task').attr('iid');
+    // console.log(taskId);
+    var task = {
+      description     : $('.taskNameInput').val(),
+      task_description: $('.descriptionInput').val(),
+      start_date      : $('.startDateInput').val(),
+      deadline        : $('.deadlineInput').val(),
+      favorite        : $('.create-favorite').attr('fav'),
+      status          : $(this).attr('status')
+    };
+    editTaskAPI(taskId, task);
+    var status = task['status'];
+    console.log(status);
   });
 
   // 'Start Task' button action, display 'Stop task' button in place
   $(document).on('click', '.startTask-button', function(){
-    var taskId = $(this).parents('[iid]').attr('iid');
+    var taskId = $('div').filter('div.form-task').attr('iid');
+    // console.log(taskId);
     var task = {
-      favorite: $(this).parents('[status]').attr('status')
+      description     : $('.taskNameInput').val(),
+      task_description: $('.descriptionInput').val(),
+      start_date      : $('.startDateInput').val(),
+      deadline        : $('.deadlineInput').val(),
+      favorite        : $('.create-favorite').attr('fav'),
+      status          : $(this).attr('status')
     };
     editTaskAPI(taskId, task);
-    var status = task['favorite'];
-    switchButtonsStatus(status);
+    var status = task['status'];
+    console.log(status);
   });
-PEINDRE ID SUR FORM TASK ET PAS SUR EDIT OU SAVE
+
   // Check Button action click on task list
   $(document).on('click', '.taskStatus', function(){
     var o={'notStarted':'done','done':'notStarted', 'started':'done'};
@@ -279,22 +311,30 @@ PEINDRE ID SUR FORM TASK ET PAS SUR EDIT OU SAVE
     deleteListAPI(taskId);
   });
 
-  //click to save and CREATE a new task 
-  $(document).on('click', '.save-new-task', function() {
+  //click to save and CREATE OR EDIT a task 
+  $(document).on('click', '.save-button', function() {
+    var taskId = $('div').filter('div.form-task').attr('iid');
+    console.log(taskId);
+
     var task = {
-      description: $('.taskNameInput').val(),
+      description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
-      start_date: $('.startDateInput').val(),
-      deadline: $('.deadlineInput').val(),
-      favorite: ($('.create-favorite').attr('fav')),
-      status: 'notStarted'
+      start_date      : $('.startDateInput').val(),
+      deadline        : $('.deadlineInput').val(),
+      favorite        : $('.create-favorite').attr('fav'),
+      status          : $('.form-task').attr('status')
     };
     if (task['description'].length != 0) {
-      createTaskAPI(task);
+      if (taskId == "null") {
+        createTaskAPI(task);
+      } else {
+        editTaskAPI(taskId, task);
+      }
     } else $('.taskNameInput').focus();
-    // clear Inputs after entry 
-    $('.newTaskInput').val('');
+
+    $('.newTaskInput').val(''); // clear Inputs after entry
     $('.create-favorite').attr('fav', 'f');
+    $('.form-task').attr({'iid': 'null', 'status': 'notStarted'});
   });
 
   // add a List function in menu
@@ -307,6 +347,17 @@ PEINDRE ID SUR FORM TASK ET PAS SUR EDIT OU SAVE
   });
   //this below is end of event_handlers functions
 };
+
+function editStatusOfTask(thisSelector) {
+  return {
+    description: $('.taskNameInput').val(),
+    task_description: $('.descriptionInput').val(),
+    start_date: $('.startDateInput').val(),
+    deadline: $('.deadlineInput').val(),
+    favorite: $('.create-favorite').attr('fav'),
+    status: $(thisSelector).attr('status')
+  };
+}
 
 function createListAPI(list) {
   api.create_item(
@@ -327,19 +378,19 @@ function createTaskAPI(task) {
     { 'iclass': 'task' },
     {
       'changes': {
-        'description': task['description'],
+        'description'     : task['description'],
         'task_description': task['task_description'],
-        'favorite': task['favorite'],
-        'start_date': task['start_date'],
-        'deadline': task['deadline'],
-        'status': task['status']
+        'favorite'        : task['favorite'],
+        'start_date'      : task['start_date'],
+        'deadline'        : task['deadline'],
+        'status'          : task['status']
       }
     }, function (taskId) {
       task['id'] = taskId;
       $('.list-of-task').append(paintTask(task));
       $('.container-create').hide();
       $('.container-main').show();
-      $('.save-button').removeClass('save-new-task');
+      $('.form-task').attr({'iid': 'null', 'status': 'notStarted'});
     }
   );
 }
@@ -352,13 +403,16 @@ function editTaskAPI(taskId, task) {
     },
     {
       'changes': {
-        'description': task['description'],
+        'description'     : task['description'],
         'task_description': task['task_description'],
-        'favorite': task['favorite'],
-        'status': task['status'],
-        'start_date': task['start_date'],
-        'deadline': task['deadline']
-      }
+        'favorite'        : task['favorite'],
+        'status'          : task['status'],
+        'start_date'      : task['start_date'],
+        'deadline'        : task['deadline']
+      },
+      // 'relations': {
+      //   'concept':[2,4,related_concept_iid1,related_concept_iid2,{'id':related_concept_iid3,'qual':'fav'}],
+      // }
     }, function (taskId) {
       task['id'] = taskId;
       $('.list-of-task').children('[iid="' + taskId + '"]').replaceWith(paintTask(task));
@@ -366,8 +420,7 @@ function editTaskAPI(taskId, task) {
       $('.container-main').show();
       $('.delete-button').removeClass('displayed');
       $('.buttonsStatus').hide();
-      $('.save-button').removeAttr('iid');
-      $('.save-button').removeClass('edit-task');
+      $('.form-task').attr({'iid': 'null', 'status': 'notStarted'}); //check in API
     }
   );
 }
@@ -379,16 +432,17 @@ function getTaskAPI(taskId) {
       'iid': taskId
     },
     function (data) {
-      $('.edit-task').attr('iid', data[0]['id']);
+      $('.form-task').attr('iid', data[0]['id']);
       $('.taskNameInput').val(data[0]['description']);
       $('.descriptionInput').val(data[0]['task_description']);
       $('.create-favorite').attr('fav', data[0]['favorite']);
       $('.form-task').attr('status', data[0]['status']);
-      console.log(data[0]['status']);
       var status = (data[0]['status']);
+      console.log(status);
       switchButtonsStatus(status);
-      // $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
-      // $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
+      $('.startDateInput').val(data[0]['start_date'].split(' ')[0]);
+      $('.deadlineInput').val(data[0]['deadline'].split(' ')[0]);
+      console.log(data[0]['start_date']);
     }
   );
 }
@@ -401,7 +455,7 @@ function switchButtonsStatus(status) {
     case 'done':
       $('.reStartTask-button').show();
       break;
-    default:
+      case 'notStarted':
       $('.startTask-taskDone-buttons').show();
       break;
   }
@@ -420,8 +474,7 @@ function deleteTaskAPI(taskId) {
       $('.newTaskInput').val('');
       $('.buttonsStatus').hide();
       $('.delete-button').removeClass('displayed');
-      $('.save-button').removeAttr('iid');
-      $('.save-button').removeClass('edit-task');
+      $('.form-task').attr({'iid': 'null', 'status': 'notStarted'});
     }
   );
 }
@@ -448,7 +501,7 @@ function editFavoriteButtonAPI(taskId, value) {
       'changes': {
         'favorite': value
       }
-    }, function (taskId) {
+    }, function () {
     // $(this).attr('fav',new_val);
     }
   );
@@ -464,7 +517,7 @@ function editTaskStatusButtonAPI(taskId, value) {
       'changes': {
         'status': value
       }
-    }, function (taskId) {
+    }, function () {
 
     }
   );
