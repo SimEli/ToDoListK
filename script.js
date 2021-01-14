@@ -20,7 +20,7 @@ function paint_containers() {
   <!-- content of main screen (all my tasks) below -->\
   <div class="container-main">\
     <div class="title-main-bar">\
-      <h1 class="title">All My Tasks</h1>\
+      <h1 class="title-of-list">All My Tasks</h1>\
       <div class="menuBtn"></div>\
     </div>\
       <div class="task-list">\
@@ -44,6 +44,10 @@ function paint_containers() {
             <div class="submit-list" ></div>\
         </div>\
         <div class="list-of-list">\
+          <div class="allMyTasks-button">\
+            <div class="list-name"><h3>All My Tasks</h3></div>\
+            <div class="numberOfTasks">TO IMPLEMENT</div>\
+          </div>\
         </div>\
         <br>\
         <div class="logout-button">\
@@ -91,9 +95,7 @@ function paint_containers() {
         </div>\
         <div>\
           <label for="list">List</label>\
-          <select name="list" class="list" placeholder="Select a list here">\
-            <option value="MFL">My first List</option>\
-            <option value="MSL">My second List</option>\
+          <select name="list" class="select-list">\
           </select>\
         </div>\
         <div>\
@@ -147,9 +149,10 @@ function event_handlers() {
   $(document).on('click', '.addATask-button', function(){
     $('.container-main').hide();
     $('.container-create').show();
-    $('.form-task').attr({'iid': 'null', 'status': 'notStarted'}); //check in API
     $('.startDateInput').val(todayDate());
     $('.deadlineInput').val(tomorrowDate());
+    $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
+    putListInSelectAPI();
   });
 
   // Cancel Create/edit Task button action, go to main
@@ -162,15 +165,30 @@ function event_handlers() {
     $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
   });
 
-  // Click on Task Button, go to Edit task
-  $(document).on('click', '.task-name', function(){
-    var taskId = $(this).parents('[iid]').attr('iid');
-    console.log(taskId);
-    $('.container-main').hide();
-    $('.container-create').show();
-    $('.delete-button').addClass('displayed');
-    getTaskAPI(taskId);
+ // Click on AllMyTasks Button, go to list of allMyTasks
+  $(document).on('click', '.allMyTasks-button', function(){
+    loadingAllMyTasks();
+  });
 
+  // Click on Task Button, go to Edit task
+ $(document).on('click', '.task-button', function(){
+  var taskId = $(this).attr('iid');
+  console.log(taskId);
+  $('.container-main').hide();
+  $('.container-create').show();
+  $('.delete-button').addClass('displayed');
+  getTaskAPI(taskId);
+  putListInSelectAPI();
+});
+
+  // Click on List Button, go to task of this list
+  $(document).on('click', '.list-button', function(){
+    var listId = $(this).attr('listId');
+    // console.log(listId);
+    var list = {
+      description : $(this).children('.list-name').text()
+    };
+    loadingTasksOfThisList(listId, list);
   });
 
   // Delete button action in EDIT
@@ -265,11 +283,14 @@ function event_handlers() {
     var taskId = $(this).parents('[iid]').attr('iid');
     
     editTaskStatusButtonAPI(taskId, new_status);
+    return false; //to avoid clicking on task-button too !
   });
 
   // Deadline Button action hover on task list
   $(document).on('mouseenter', '.deadlineBtn', function() {
-    $(this).siblings('.tooltip').addClass('displayed');
+    var thisTooltip = $(this).siblings('.tooltip');
+    thisTooltip.addClass('displayed');
+    remainingDaysInTooltip(thisTooltip);
   });
   $(document).on('mouseleave', '.deadlineBtn', function() {
     $(this).siblings('.tooltip').removeClass('displayed');
@@ -288,6 +309,7 @@ function event_handlers() {
     var taskId = $(this).parents('[iid]').attr('iid');
     
     editFavoriteButtonAPI(taskId, new_val);
+    return false; //to avoid clicking on task-button too !
   });
 
 // Favorite Button action click on Create Menu
@@ -298,26 +320,40 @@ function event_handlers() {
     var new_val=o[val]
 
     console.log(new_val);
-    $(this).attr('fav',new_val)
+    $(this).attr('fav',new_val);
   });
 
   // Delete list button action in Menu
   $(document).on('click', '.delete-list-button', function(){
-    var taskId = $(this).parents('[iid]').attr('iid');
-    console.log(taskId);
-    deleteListAPI(taskId);
+    var listId = $(this).parents('[listId]').attr('listId');
+    console.log(listId);
+    deleteListAPI(listId);
+  });
+
+  // StartDate Input action calculating remaining time in Create Menu
+  $(document).on('change', '.startDateInput', function(){
+    remainingDaysInEdit();
   });
 
  // Deadline Input action calculating remaining time in Create Menu
- $(document).on('click', '.deadlineInput', function(){
-  remainingDays();
-});
+  $(document).on('change', '.deadlineInput', function(){
+    remainingDaysInEdit();
+  });
+
+  // addind attribute listId on form task in Create Menu
+  // $(document).on('click', '.select-list', function(){
+  //   listSelected = ( $(".select-list option:selected").val() );
+  //   $('.form-task').attr('listId', listSelected);
+  // });
 
   //click to save and CREATE OR EDIT a task 
   $(document).on('click', '.save-button', function() {
     var taskId = $('div').filter('div.form-task').attr('iid');
     console.log(taskId);
-
+    var listId =$(".select-list option:selected").val();
+    console.log(listId);
+    // var listId = $('div').filter('div.form-task').attr('listId');
+    // console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -329,9 +365,9 @@ function event_handlers() {
     };
     if (task['description'].length != 0) {
       if (taskId == "null") {
-        createTaskAPI(task);
+        createTaskAPI(task, listId);
       } else {
-        editTaskAPI(taskId, task);
+        editTaskAPI(taskId, task, listId);
       }
     } else $('.taskNameInput').focus();
 
@@ -342,7 +378,9 @@ function event_handlers() {
 
   // add a List function in menu
   $(document).on('click', '.submit-list', function() {
-    var list = $('.listName').val();
+    var list = {
+      description : $('.listName').val()
+    };
     if (list.length != 0) {
       createListAPI(list);
     } else $('.listName').focus();
@@ -371,22 +409,27 @@ function tomorrowDate() {
   return tomorrow ;
 }
 
-function remainingDays() {
-  // getTaskAPI()
-  var start_date   = $('.startDateInput').val();
-  var deadline     = $('.deadlineInput').val();
-  console.log(deadline);
-  var date1 = new Date(start_date); 
-  console.log(date1);
-  var date2 = new Date(deadline);
+function remainingDaysInEdit() {
+  var todaysDate         = todayDate();
+  var deadline           = $('.deadlineInput').val();
+  var date1              = new Date(todaysDate);
+  var date2              = new Date(deadline);
   var Difference_In_Time = date2.getTime() - date1.getTime();
-  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
-  console.log(Difference_In_Days);
+  var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
   $(".numberOfDays").text(Difference_In_Days);
   $('.form-task').attr('remainingDays', Difference_In_Days);
-  console.log(typeof Difference_In_Days);
+  $(".message").text(Difference_In_Days);
 }
 
+function remainingDaysInTooltip(thisTooltip) {
+  var todaysDate         = todayDate();
+  var deadline           = thisTooltip.attr('deadline');
+  var date1              = new Date(todaysDate);
+  var date2              = new Date(deadline);
+  var Difference_In_Time = date2.getTime() - date1.getTime();
+  var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+  $(".message").text(Difference_In_Days + " day(s) left");
+}
 // function editStatusOfTask(thisSelector) {
 //   return {
 //     description: $('.taskNameInput').val(),
@@ -403,16 +446,18 @@ function createListAPI(list) {
     { 'iclass': 'list' },
     {
       'changes': {
-        'description': list
+        'description': list['description']
       }
     },
-    function (list) {
+    function (listId) {
+      list['id'] = listId;
+      // console.log(list);
       $('.list-of-list').append(paintList(list));
     }
   );
 }
 
-function createTaskAPI(task) {
+function createTaskAPI(task, listId) {
   api.create_item(
     { 'iclass': 'task' },
     {
@@ -422,8 +467,10 @@ function createTaskAPI(task) {
         'favorite'        : task['favorite'],
         'status'          : task['status'],
         'start_date'      : task['start_date'],
-        'deadline'        : task['deadline'],
-        'remaining_days'  : task['remaining_days']
+        'deadline'        : task['deadline']
+      },
+      'relations': {
+        'list':[listId]
       }
     }, function (taskId) {
       task['id'] = taskId;
@@ -435,7 +482,7 @@ function createTaskAPI(task) {
   );
 }
 
-function editTaskAPI(taskId, task) {
+function editTaskAPI(taskId, task, listId) {
   api.edit(
     {
       'iclass': 'task',
@@ -448,12 +495,11 @@ function editTaskAPI(taskId, task) {
         'favorite'        : task['favorite'],
         'status'          : task['status'],
         'start_date'      : task['start_date'],
-        'deadline'        : task['deadline'],
-        'remaining_days'  : task['remaining_days']
+        'deadline'        : task['deadline']
       },
-      // 'relations': {
-      //   'concept':[2,4,related_concept_iid1,related_concept_iid2,{'id':related_concept_iid3,'qual':'fav'}],
-      // }
+      'relations': {
+        'list':[listId]
+      }
     }, function (taskId) {
       task['id'] = taskId;
       $('.list-of-task').children('[iid="' + taskId + '"]').replaceWith(paintTask(task));
@@ -482,9 +528,23 @@ function getTaskAPI(taskId) {
       $('.form-task').attr('status', data[0]['status']);
       var status = (data[0]['status']);
       switchButtonsStatus(status);
-      $('.form-task').attr('remainingDays', data[0]['remaining_days']);
-      $(".numberOfDays").text(data[0]['remaining_days']);
+      remainingDaysInEdit();
+    }
+  );
+}
 
+function putListInSelectAPI() {
+  $('.select-list').html('');
+  api.search_item(
+    {
+      'iclass':'list',
+      'search':''
+    },
+    {},
+    function(data){
+      for(var i = 0; i < data.length; i++) {
+        $('.select-list').append('<option value="' + data[i]['id'] + '"> ' + data[i]['description'] + '</option>');
+      }
     }
   );
 }
@@ -521,14 +581,14 @@ function deleteTaskAPI(taskId) {
   );
 }
 
-function deleteListAPI(taskId) {
+function deleteListAPI(listId) {
   api.delete_item(
     {
       'iclass': 'list',
-      'iid': taskId
+      'iid': listId
     },
     function () {
-    $('.delete-list-button').parents('[iid="' + taskId + '"]').remove();
+    $('.delete-list-button').parents('[listId="' + listId + '"]').remove();
     }
   );
 }
@@ -567,7 +627,10 @@ function editTaskStatusButtonAPI(taskId, value) {
 
 // main menu with tasks loaded from DB
 function loadingAllMyTasks() {
-  $(".container-main").show();
+  $('.list-of-task').html('');
+  $('.container-main').show();
+  $('.container-menu').hide();
+  $(".title-of-list").text('All My Tasks');
   api.search_item(
     {
       'iclass':'task',
@@ -577,21 +640,46 @@ function loadingAllMyTasks() {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));
+        console.log(data.length);
       }
     }
   );
 };
 
+function loadingTasksOfThisList(listId, list) {
+  $('.list-of-task').html('');
+  $('.container-main').show();
+  $('.container-menu').hide();
+  api.search_item(
+    {
+      'iclass':'task',
+      'search':''
+    },
+    {
+      'relations':{
+        'list':[listId]
+      }
+    },
+    function(data){
+      for(var i = 0; i < data.length; i++) {
+        $('.list-of-task').append(paintTask(data[i]));
+        console.log(data.length);
+      }
+      $(".title-of-list").text(list['description']);
+    }
+  );
+};
+  
 // display new task in task list
 function paintTask(task){
   return ('\
-  <div class="task-button" iid="'+task['id']+'" status="'+task['status']+'" remainingDays="'+task['remaining_days']+'">\
+  <div class="task-button" iid="'+task['id']+'" status="'+task['status']+'">\
     <div class="check-task_name-onLeft">\
       <div class="taskStatus"></div>\
       <div class="task-name"><h1>' + task['description'] + '</h1></div>\
     </div>\
     <div class="deadline-favorite-onRight">\
-      <div class="tooltip"><div class="message">' + task['remaining_days'] + ' day(s) left</div><div class="arrow"></div></div>\
+      <div class="tooltip" deadline="'+task['deadline']+'"><div class="message"></div><div class="arrow"></div></div>\
       <div class="deadlineBtn"></div>\
       <div class="favorite" fav="'+task['favorite']+'"></div>\
     </div>\
@@ -599,7 +687,9 @@ function paintTask(task){
 };
 
 function loadingAllMyLists() {
-  $(".container-menu").show();
+  $('.list-button').remove();
+  // remove because html don't work and cannot do it on list of list because keep allMytasks button
+  $('.container-menu').show();
   api.search_item(
     {
       'iclass':'list',
@@ -609,6 +699,7 @@ function loadingAllMyLists() {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-list').append(paintList(data[i]));
+        console.log(data.length);
       }
     }
   );
@@ -616,7 +707,7 @@ function loadingAllMyLists() {
 
 function paintList(list){
   return ('\
-  <div class="list-button" iid="' + list['id'] + '">\
+  <div class="list-button" listId="' + list['id'] + '">\
     <div class="list-name"><h3>' + list['description'] + '</h3></div>\
     <div class="delete-list-button"></div>\
   </div>');
