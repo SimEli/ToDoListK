@@ -350,12 +350,11 @@ h2 {
   font-size: 15px;
 }
 
-.numberOfTasks {
+.numberOfTasks, .numberOfAllTasks {
   background-color: red;
   height: 30px;
   width: 100px;
-  margin-right: 380px;
-
+  margin-right: 300px;
 }
 
 .delete-list-button {

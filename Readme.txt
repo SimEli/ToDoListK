@@ -75,4 +75,8 @@ If you are trying to use a Template literal then you need to use backticks and t
 $(`.snitches-index-header + .tags-column .${state}_count`)
 ----------------------------------------
 
-add current list when adding a task !!
+add current list when adding a task !!  in get task api !!
+
+add SPREAD on Box Shadow (save delete cancel et buttons status)
+
+Uppercase list and task name ? and in .text titre tasks

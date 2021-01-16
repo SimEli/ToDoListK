@@ -46,7 +46,7 @@ function paint_containers() {
         <div class="list-of-list">\
           <div class="allMyTasks-button">\
             <div class="list-name"><h3>All My Tasks</h3></div>\
-            <div class="numberOfTasks">TO IMPLEMENT</div>\
+            <div class="numberOfAllTasks"></div>\
           </div>\
         </div>\
         <br>\
@@ -131,13 +131,11 @@ function event_handlers() {
   // menu button action, go menu
   $(document).on('click', '.menuBtn', function(){
     loadingAllMyLists();
-    $('.container-main').hide();
   });
 
   // close button action, go back main
   $(document).on('click', '.closeBtn', function(){
-    $('.container-main').show();
-    $('.container-menu').hide();
+    loadingAllMyTasks();
   });
 
   // logout button action, go back login
@@ -640,8 +638,21 @@ function loadingAllMyTasks() {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));
-        console.log(data.length);
       }
+      // console.log(data.length);
+    }
+  );
+};
+
+function numberOfAllMyTasks() {
+  api.search_item(
+    {
+      'iclass':'task',
+      'search':''
+    },
+    {},
+    function(data){
+      $(".numberOfAllTasks").text("( " + data.length + " )");
     }
   );
 };
@@ -663,13 +674,38 @@ function loadingTasksOfThisList(listId, list) {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));
-        console.log(data.length);
       }
+      console.log(data.length);
       $(".title-of-list").text(list['description']);
+
     }
   );
 };
-  
+
+function numberOfTasksInThisList(listId) {
+  api.search_item(
+    {
+      'iclass':'task',
+      'search':''
+    },
+    {
+      'relations':{
+        'list':[listId]
+      }
+    },
+    function(data){
+      var listId = $(".numberOfTasks").parent('[listId]').attr('listId');
+
+      // for(var i = 0; i < data.length; i++) {
+        console.log(data);
+        console.log(data.length);
+        console.log(listId);
+        $(".numberOfTasks").parent('[listId]').attr('listId').text("( " + data.length + " )");
+      }
+    // }
+  );
+};
+
 // display new task in task list
 function paintTask(task){
   return ('\
@@ -690,6 +726,7 @@ function loadingAllMyLists() {
   $('.list-button').remove();
   // remove because html don't work and cannot do it on list of list because keep allMytasks button
   $('.container-menu').show();
+  $('.container-main').hide();
   api.search_item(
     {
       'iclass':'list',
@@ -699,16 +736,21 @@ function loadingAllMyLists() {
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-list').append(paintList(data[i]));
-        console.log(data.length);
+        var listId = data[i]['id'];
+        console.log(listId);
+        numberOfTasksInThisList(listId);
       }
     }
   );
+  // var listId = $('div').filter('div.list-button').attr('listId');
+  numberOfAllMyTasks();
 };
 
 function paintList(list){
   return ('\
   <div class="list-button" listId="' + list['id'] + '">\
     <div class="list-name"><h3>' + list['description'] + '</h3></div>\
+    <div class="numberOfTasks">' + list.length + '</div>\
     <div class="delete-list-button"></div>\
   </div>');
 };
