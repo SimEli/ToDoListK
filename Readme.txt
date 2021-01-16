@@ -6,14 +6,7 @@
     * ! CSS for tooltip ! and tooltip remaining time
     check color and background color tooltip
 
-    * relations between lists and tasks and in selection list 
-      lists = all my tasks with number (array.length)
-      + all other lists created (with bin on list-button)
-      when click on a list, display "all my tasks" or the clicked named list which all her tasks
-
 enlever tous les displays flex ! et mettre position absolute et relative partout.
-
-check .buttonsStatus éliminer, faire un check if idd null alors rien ou switchButtonsStatus !! + button delete displayed
 
 //click to save and CREATE a new task 
   $(document).on('click', '.save-button', function() {
@@ -33,7 +26,6 @@ check .buttonsStatus éliminer, faire un check if idd null alors rien ou switchB
     $('.create-favorite').attr('fav', 'f');
     $('.form-task').attr({'iid': 'null', 'status': 'notStarted'}); //check in API
   });
-
 // Save button action in EDIT MODE
   $(document).on('click', '.edit-task', function() {
     var taskId = $(this).attr('iid'); // herrrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeee
@@ -48,11 +40,7 @@ check .buttonsStatus éliminer, faire un check if idd null alors rien ou switchB
     };
     editTaskAPI(taskId, task);
   });
-
-  .closest()
-
----------------------------------
-editStatusOfTask()
+--------------------------------
 
   var task = {
       description     : $('.taskNameInput').val(),
@@ -62,7 +50,6 @@ editStatusOfTask()
       favorite        : $('.create-favorite').attr('fav'),
       status          : $(this).attr('status')
     };
-
 put this variable in global scope, OK but not the "this" !
 
 maybe check with a case switch for start stop and restart and done btn ?
@@ -73,6 +60,23 @@ https://stackoverflow.com/questions/34841300/switch-statement-in-jquery-click-ha
 change paint_containers method and remove all display:none ! check with attr "state" to show or hide, or with a function acting on the selector
 $(.container- + value +) ?? or 3 function paintcontaienrs ? menu main create ? OR container-menu.siblings.not(tata).hide ?
 
-bug with close and menu button LOADING ALL MY LIST load and load again
-
 to display or not a div, play with class or attr and opacity !
+
+mettre restarttask btn example sur bckgd de restarttask-button = div restarttaskbtn delete
+
+merge delete-button class displayed avec buttons status hide ! 
+NOOO because delete aussi sur displayed
+
+mettre un if dans remainingDaysIN EDIT SI STARTDATE pas = a TODAY mais dans futur !!! NOOOOOOOOOOOOOOO
+---------------------------------------
+You can concatenate the variable with the string:
+$(".snitches-index-header + .tags-column ." + state + "_count")
+If you are trying to use a Template literal then you need to use backticks and the dollar sign not #:
+$(`.snitches-index-header + .tags-column .${state}_count`)
+----------------------------------------
+
+add current list when adding a task !!  in get task api !!
+
+add SPREAD on Box Shadow (save delete cancel et buttons status)
+
+Uppercase list and task name ? and in .text titre tasks
