@@ -88,7 +88,7 @@ function paint_containers() {
         <div class="reStartTaskBtn"></div>\
       </div>\
     </div>\
-    <div class="form-task">\
+    <div class="form-task" iid="null" status="notStarted" remainingDays="1">\
         <div>\
           <label for="description">Description</label>\
           <input type="text" name="description" class="descriptionInput newTaskInput" placeholder="task description">\
@@ -106,7 +106,7 @@ function paint_containers() {
           <label for="deadline">Deadline</label>\
           <input type="date" name="deadline" class="deadlineInput newTaskInput">\
         </div>\
-        <div class="remainingDays-display">Remaining Time:<span class="numberOfDays"></span>day(s)</div>\
+        <div class="remainingDays-display">Remaining Time:<span class="numberOfDays">1</span>day(s)</div>\
       <!-- </form> -->\
     </div>\
     <div class="save-cancel-delete-buttons">\
@@ -118,7 +118,7 @@ function paint_containers() {
         <h2 class="title">Cancel</h2>\
         <div class="cancelBtn"></div>\
       </div>\
-      <div class="delete-button">\
+      <div class="delete-button buttonsStatus">\
         <h2 class="title">Delete</h2>\
         <div class="deleteBtn"></div>\
       </div>\
@@ -149,7 +149,6 @@ function event_handlers() {
     $('.container-create').show();
     $('.startDateInput').val(todayDate());
     $('.deadlineInput').val(tomorrowDate());
-    $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
     putListInSelectAPI();
   });
 
@@ -157,10 +156,7 @@ function event_handlers() {
   $(document).on('click', '.cancel-button', function(){
     $('.container-create').hide();
     $('.container-main').show();
-    $('.newTaskInput').val('');
-    $('.buttonsStatus').hide();
-    $('.delete-button').removeClass('displayed');
-    $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
+    clearInputsAndSetDefaultAttributes();
   });
 
  // Click on AllMyTasks Button, go to list of allMyTasks
@@ -174,7 +170,6 @@ function event_handlers() {
   console.log(taskId);
   $('.container-main').hide();
   $('.container-create').show();
-  $('.delete-button').addClass('displayed');
   getTaskAPI(taskId);
   putListInSelectAPI();
 });
@@ -200,6 +195,8 @@ function event_handlers() {
   $(document).on('click', '.stopTask-button', function(){
     var taskId = $('div').filter('div.form-task').attr('iid');
     // console.log(taskId);
+    var listId =$(".select-list option:selected").val();
+    console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -209,7 +206,7 @@ function event_handlers() {
       remaining_days  : $('.form-task').attr('remainingDays'),
       status          : $(this).attr('status')
     };
-    editTaskAPI(taskId, task);
+    editTaskAPI(taskId, task, listId);
     var status = task['status'];
     console.log(status);
   });
@@ -218,6 +215,8 @@ function event_handlers() {
   $(document).on('click', '.taskDone-button', function(){
     var taskId = $('div').filter('div.form-task').attr('iid');
     // console.log(taskId);
+    var listId =$(".select-list option:selected").val();
+    console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -227,7 +226,7 @@ function event_handlers() {
       remaining_days  : $('.form-task').attr('remainingDays'),
       status          : $(this).attr('status')
     };
-    editTaskAPI(taskId, task);
+    editTaskAPI(taskId, task, listId);
     var status = task['status'];
     console.log(status);
   });
@@ -236,6 +235,8 @@ function event_handlers() {
   $(document).on('click', '.reStartTask', function(){
     var taskId = $('div').filter('div.form-task').attr('iid');
     // console.log(taskId);
+    var listId =$(".select-list option:selected").val();
+    console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -245,15 +246,19 @@ function event_handlers() {
       remaining_days  : $('.form-task').attr('remainingDays'),
       status          : $(this).attr('status')
     };
-    editTaskAPI(taskId, task);
+    editTaskAPI(taskId, task, listId);
     var status = task['status'];
     console.log(status);
   });
 
   // 'Start Task' button action, display 'Stop task' button in place
   $(document).on('click', '.startTask-button', function(){
+    var $this = $(this);//////////////////////////////////////OK POUR FCT !!
+    console.log($this);
     var taskId = $('div').filter('div.form-task').attr('iid');
     // console.log(taskId);
+    var listId =$(".select-list option:selected").val();
+    console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -263,7 +268,7 @@ function event_handlers() {
       remaining_days  : $('.form-task').attr('remainingDays'),
       status          : $(this).attr('status')
     };
-    editTaskAPI(taskId, task);
+    editTaskAPI(taskId, task, listId);
     var status = task['status'];
     console.log(status);
   });
@@ -287,11 +292,11 @@ function event_handlers() {
   // Deadline Button action hover on task list
   $(document).on('mouseenter', '.deadlineBtn', function() {
     var thisTooltip = $(this).siblings('.tooltip');
-    thisTooltip.addClass('displayed');
+    thisTooltip.show();
     remainingDaysInTooltip(thisTooltip);
   });
   $(document).on('mouseleave', '.deadlineBtn', function() {
-    $(this).siblings('.tooltip').removeClass('displayed');
+    $(this).siblings('.tooltip').hide();
   });
 
   // Favorite Button action click on task list
@@ -326,6 +331,7 @@ function event_handlers() {
     var listId = $(this).parents('[listId]').attr('listId');
     console.log(listId);
     deleteListAPI(listId);
+    return false; //to avoid clicking on list-button too !
   });
 
   // StartDate Input action calculating remaining time in Create Menu
@@ -350,8 +356,6 @@ function event_handlers() {
     console.log(taskId);
     var listId =$(".select-list option:selected").val();
     console.log(listId);
-    // var listId = $('div').filter('div.form-task').attr('listId');
-    // console.log(listId);
     var task = {
       description     : $('.taskNameInput').val(),
       task_description: $('.descriptionInput').val(),
@@ -368,10 +372,6 @@ function event_handlers() {
         editTaskAPI(taskId, task, listId);
       }
     } else $('.taskNameInput').focus();
-
-    $('.newTaskInput').val(''); // clear Inputs after entry
-    $('.create-favorite').attr('fav', 'f');
-    $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
   });
 
   // add a List function in menu
@@ -386,6 +386,13 @@ function event_handlers() {
   });
   //this below is end of event_handlers functions
 };
+
+function clearInputsAndSetDefaultAttributes() {
+  $('.newTaskInput').val(''); // clear Inputs after entry
+  $('.create-favorite').attr('fav', 'f');
+  $('.form-task').attr({ 'iid': 'null', 'status': 'notStarted', 'remainingDays': 1 });
+  $('.buttonsStatus').hide();
+}
 
 function todayDate() {
   var today = new Date();
@@ -475,7 +482,7 @@ function createTaskAPI(task, listId) {
       $('.list-of-task').append(paintTask(task));
       $('.container-create').hide();
       $('.container-main').show();
-      $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
+      clearInputsAndSetDefaultAttributes();
     }
   );
 }
@@ -503,9 +510,7 @@ function editTaskAPI(taskId, task, listId) {
       $('.list-of-task').children('[iid="' + taskId + '"]').replaceWith(paintTask(task));
       $('.container-create').hide();
       $('.container-main').show();
-      $('.delete-button').removeClass('displayed');
-      $('.buttonsStatus').hide();
-      $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
+      clearInputsAndSetDefaultAttributes();
     }
   );
 }
@@ -555,10 +560,11 @@ function switchButtonsStatus(status) {
     case 'done':
       $('.reStartTask-button').show();
       break;
-      case 'notStarted':
+    case 'notStarted':
       $('.startTask-taskDone-buttons').show();
       break;
   }
+  $('.delete-button').show();
 }
 
 function deleteTaskAPI(taskId) {
@@ -571,10 +577,7 @@ function deleteTaskAPI(taskId) {
       $('.task-name').parents('[iid="' + taskId + '"]').remove();
       $('.container-create').hide();
       $('.container-main').show();
-      $('.newTaskInput').val('');
-      $('.buttonsStatus').hide();
-      $('.delete-button').removeClass('displayed');
-      $('.form-task').attr({'iid': 'null', 'status': 'notStarted', 'remainingDays': 1});
+      clearInputsAndSetDefaultAttributes();
     }
   );
 }
@@ -652,7 +655,7 @@ function numberOfAllMyTasks() {
     },
     {},
     function(data){
-      $(".numberOfAllTasks").text("( " + data.length + " )");
+      $(".numberOfAllTasks").html("<h3>( " + data.length + " )</h3>");
     }
   );
 };
@@ -694,13 +697,14 @@ function numberOfTasksInThisList(listId) {
       }
     },
     function(data){
-      var listId = $(".numberOfTasks").parent('[listId]').attr('listId');
-
-      // for(var i = 0; i < data.length; i++) {
-        console.log(data);
-        console.log(data.length);
+      // var listId = $(".numberOfTasks").attr('listId');
+      var numberOfTasks = $('.list-button').children('[listId="' + listId + '"]');
+      console.log(numberOfTasks);
         console.log(listId);
-        $(".numberOfTasks").parent('[listId]').attr('listId').text("( " + data.length + " )");
+        console.log(data.length);
+      //  numberOfTasks.text("( " + data.length + " )");
+       numberOfTasks.html("<h3>( " + data.length + " )</h3>");
+
       }
     // }
   );
@@ -737,7 +741,7 @@ function loadingAllMyLists() {
       for(var i = 0; i < data.length; i++) {
         $('.list-of-list').append(paintList(data[i]));
         var listId = data[i]['id'];
-        console.log(listId);
+        // console.log(listId);
         numberOfTasksInThisList(listId);
       }
     }
@@ -746,11 +750,12 @@ function loadingAllMyLists() {
   numberOfAllMyTasks();
 };
 
+//// enlever list id sur list button if sur number of tasks works
 function paintList(list){
   return ('\
   <div class="list-button" listId="' + list['id'] + '">\
     <div class="list-name"><h3>' + list['description'] + '</h3></div>\
-    <div class="numberOfTasks">' + list.length + '</div>\
+    <div class="numberOfTasks" listId="' + list['id'] + '"><h3>( 0 )</h3></div>\
     <div class="delete-list-button"></div>\
   </div>');
 };

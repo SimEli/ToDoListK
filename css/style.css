@@ -50,9 +50,6 @@ h2 {
 
 #gSignInWrapper {
   padding: 10px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   background-color: white;
   color: #757575;
   cursor: pointer;
@@ -60,9 +57,6 @@ h2 {
 
 .notextselect {
   padding: 10px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   background-color: #fc7033;
   color: #EAEAEA;
   cursor: pointer;
@@ -132,6 +126,7 @@ h2 {
 
 .task-button[status="done"] .taskStatus {
   background-image: url(images/check.svg);
+  /* filter: grayscale(80%); */
 }
 
 .task-button[status="done"]{
@@ -346,7 +341,7 @@ h2 {
   padding-left: 15px;
 }
 
-.list-name h3 {
+.list-name h3, .numberOfTasks h3 {
   font-size: 15px;
 }
 
@@ -561,24 +556,6 @@ h2 {
   font-size: 16px;
   box-sizing: border-box;
 }
-/* 
-.form-task select {
-  height: 50px;
-  width: 400px;
-  text-indent: 5px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
-} */
-
-/* .form-task input[type='date'] {
-  height: 50px;
-  width: 400px;
-  text-indent: 5px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
-} */
 
 .remainingDays-display {
   text-align: center;
@@ -653,8 +630,4 @@ h2 {
   background-image: url(images/delete.svg);
   background-size: cover;
   margin: 5px 40px;
-}
-
-.displayed {
-  display: flex;
 }
