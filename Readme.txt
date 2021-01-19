@@ -1,4 +1,4 @@
- 
+ comment griser tout les task button DONE ?? 
     --> whitesmoke for "done" = weird
     --> fff3b0 for "started" = not "yellowish" temporarly changed.
     -->  var o={'notStarted':'done','done':'notStarted', 'started':'done'}; check if OK, on click when started = done but on reclick = notStarted (need to go in edit mode and restart task)
@@ -67,7 +67,6 @@ mettre restarttask btn example sur bckgd de restarttask-button = div restarttask
 merge delete-button class displayed avec buttons status hide ! 
 NOOO because delete aussi sur displayed
 
-mettre un if dans remainingDaysIN EDIT SI STARTDATE pas = a TODAY mais dans futur !!! NOOOOOOOOOOOOOOO
 ---------------------------------------
 You can concatenate the variable with the string:
 $(".snitches-index-header + .tags-column ." + state + "_count")
@@ -80,3 +79,8 @@ add current list when adding a task !!  in get task api !!
 add SPREAD on Box Shadow (save delete cancel et buttons status)
 
 Uppercase list and task name ? and in .text titre tasks
+
+
+
+    clearInputsAndSetDefaultAttributes();
+check if OK
