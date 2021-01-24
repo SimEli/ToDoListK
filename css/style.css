@@ -1,13 +1,10 @@
 html, body {
-  background-image: url(images/bg.png);
-  /* background-position: center center; */
-  background-repeat: no-repeat;
-  background-size: cover;
+  font-family          : 'Raleway', sans-serif;
+  background-size      : cover;
+  background-repeat    : no-repeat;
   background-attachment: fixed;
-  /* height:100%; */
-  /* width:100%; */
-  /* margin:0; */
-  font-family: 'Raleway', sans-serif;
+  background-image     : url(images/bg.png);
+  background-position  : right;
 }
 
 h1 {
@@ -16,13 +13,13 @@ h1 {
 /* h2 to apply also in save and cancel bar (create) */
 h2 {
   margin-left: 40px;
-  font-size: 19.5px;
-  color: #EAEAEA;
+  font-size  : 19.5px;
+  color      : #EAEAEA;
 }
 
 /* below -------------------------CSS for Home screen */
 #loginBox {
-  width: 480px;
+  width : 480px;
   margin: auto;
 }
 
@@ -32,92 +29,103 @@ h2 {
 
 #login_container {
   text-align: center;
-  max-width: 480px;
+  max-width : 480px;
   margin-top: 20px;
 }
 
-#login_container input {
-  /* padding: 2px 10px; */
-}
 #login_container input, #gSignInWrapper, .notextselect {
-  height: 40px;
-  width: 350px;
-  box-sizing: border-box;
+  height     : 40px;
+  width      : 350px;
+  margin     : 5px auto;
+  box-sizing : border-box;
   font-family: 'Raleway', sans-serif;
-  box-shadow: 1px 1px 2px #1C1C22;
-  margin: 5px auto;
-}
+  box-shadow: 2px 2px 4px #373a3d;}
 
 #gSignInWrapper {
-  padding: 10px;
+  padding         : 10px;
+  color           : #757575;
+  cursor          : pointer;
   background-color: white;
-  color: #757575;
-  cursor: pointer;
 }
 
 .notextselect {
-  padding: 10px;
+  padding         : 10px;
+  color           : #EAEAEA;
+  cursor          : pointer;
   background-color: #fc7033;
-  color: #EAEAEA;
-  cursor: pointer;
 }
 
 /* below -------------------------CSS for Main screen */
 .container-main {
-  display: none;
-  width: 600px;
-  margin: 0 auto;
+  display : none;
+  position: relative;
+  width   : 600px;
+  margin  : 0 auto;
 }
 
-.title-main-bar {
-  display: flex;
-  height: 100px;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  box-shadow: 1px -1px 2px 0px #1C1C22;
+.title-main-bar, .title-menu-bar, .title-create-bar {
+  position               : relative;
+  height                 : 100px;
+  text-transform         : capitalize;
+  border-top-left-radius : 2px;
+  border-top-right-radius: 2px;
+  box-shadow             : 2px 2px 4px #373a3d;
 }
 
-.menuBtn  {
-  height: 50px;
-  width: 50px;
+.title-of-list {
+  position   : absolute;
+  height     : 26px;
+  top        : 37px;
+  left       : 15px;
+  font-size  : 22.5px;
+  font-weight: 500;
+}
+
+.menuBtn {
+  position        : absolute;
+  top             : 25px;
+  right           : 30px;
+  height          : 50px;
+  width           : 50px;
+  cursor          : pointer;
+  border-radius   : 25px;
+  background-size : cover;
+  background-color: #D57B4A;
   background-image: url(images/menu.svg);
-  background-size: cover;
-  box-shadow: 1px 1px 4px #1C1C22;
-  border-radius: 25px;
-  cursor: pointer;
-  background-color: #CF0E22;
+  box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .task-list {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #F9803B;
-  box-shadow: 1px 1px 2px 0px #1C1C22;
+  position                  : relative;
+  padding-top               : 10px;
+  padding-bottom            : 20px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius : 2px;
+  background-color          : #F9803B;
+  box-shadow                : 2px 2px 4px #373a3d;
 }
 
 .task-button {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 95%;
-  margin: 5px auto;
+  position        : relative;
+  margin          : 5px 15px;
+  height          : 60px;
+  width           : 95%;
+  cursor          : pointer;
   background-color: #ffc35e;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 1px 1px 4px #1C1C22;
+  border-radius   : 2px;
+  box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .task-button[status="notStarted"] .taskStatus, .task-button[status="started"] .taskStatus, .task-button[status="done"] .taskStatus {
-  height: 40px;
-  width: 40px;
-  background-image: url(images/not_check.svg);
+  position         : absolute;
+  left             : 15px;
+  top              : 10px;
+  height           : 40px;
+  width            : 40px;
+  cursor           : pointer;
+  background-size  : cover;
   background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  margin-left: 10px;
-  margin-right: 10px;
+  background-image : url(images/not_check.svg);
 }
 
 .task-button .taskStatus:hover {
@@ -126,85 +134,88 @@ h2 {
 
 .task-button[status="done"] .taskStatus {
   background-image: url(images/check.svg);
-  /* filter: grayscale(80%); */
 }
 
 .task-button[status="done"]{
   background-color: whitesmoke;
+  opacity         : 0.7;
+  filter          : blur(0.7px);
 }
+/* how to make all div even SVG more grey ?! */
 
 .task-button[status="started"] {
-  background-color: #ffe75e;
+  background-color: #fff3b0;
 }
 
 .task-name {  
-  padding-left: 15px;
-  padding-right: 10px;
-  width: auto;
-}
-
-.check-task_name-onLeft, .deadline-favorite-onRight {
-  display: flex;
-  align-items: center;
-  padding-left: 5px;
-  height: 60px;
+  position     : absolute;
+  top          : 17px;
+  left         : 75px;
+  height       : 26px;
+  font-size    : 22.5px;
+  font-weight  : 500;
+  width        : fit-content;
+  max-width    : 400px;
+  white-space  : nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
 }
 
 .tooltip {
-  display: none;
-  color: #f5f5f5;
-  background-color: rgb(54, 48, 48);
-  box-shadow: 1px 1px 1px #797980;
-  width: 95px;
-  margin-right: 10px;
-  height: 24px;
-  font-size: 13px;
-  font-weight: lighter;
-  text-align: center;
-  position: relative;
-  border-radius: 4px;
-  /* opacity: 1;
-  z-index: 4; */
-  transition: all 0.3s ease;
+  display         : none;
+  position        : absolute;
+  top             : 18px;
+  right           : 105px;
+  width           : 95px;
+  height          : 24px;
+  font-size       : 13px;
+  opacity         : 0.6;
+  border-radius   : 4px;
+  color           : #f5f5f5;
+  background-color: black;
+  transition      : all 0.3s ease;
+  box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .message {
   position: absolute;
-  top: 4px;
-  left: 11px;
+  top     : 4px;
+  left    : 11px;
 }
 
 .arrow {
-  position: absolute;
-  top: 10px;
-  right: -2px;
-  width: 4px;
-  height: 4px;
-  background-color: rgb(54, 48, 48);
-  box-shadow: 1px -1px 1px #797980;
-  transform: rotate(45deg);
-  /* opacity: 1; ///////////////////////// PLAY WITH OPACITY AND ACTVE CLASS
-  z-index: 1; */
+  position        : absolute;
+  top             : 10px;
+  right           : -2px;
+  width           : 4px;
+  height          : 4px;
+  transform       : rotate(45deg);
+  background-color: black;
+  box-shadow: 2px 2px 4px #373a3d;
 }
 
 .deadlineBtn {
-  height: 40px;
-  width: 40px;
-  background-image: url(images/time.svg);
+  position         : absolute;
+  top              : 10px;
+  right            : 60px;
+  height           : 40px;
+  width            : 40px;
+  cursor           : pointer;
+  background-size  : cover;
   background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
+  background-image : url(images/time.svg);
 }
 
 .favorite[fav="f"], .favorite[fav="t"] {
-  height: 40px;
-  width: 40px;
-  background-image: url(images/empty_star.svg);
+  position         : absolute;
+  top              : 10px;
+  right            : 10px;
+  height           : 40px;
+  width            : 40px;
+  cursor           : pointer;
+  background-size  : cover;
   background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
+  background-image : url(images/empty_star.svg);
 }
 
 .favorite[fav="t"] {
@@ -215,14 +226,203 @@ h2 {
   background-image: url(images/full_star.svg);
 }
 
+.addATask-button {
+  position           : relative;
+  top                : 10px;
+  left               : 6px;
+  height             : 60px;
+  width              : 98%;
+  cursor             : pointer;
+  background-size    : 40px;
+  background-color   : #E96330;
+  background-repeat  : no-repeat;
+  background-image   : url(images/add.svg);
+  background-position: top 10px right 40px;
+  border-radius      : 2px;
+  box-shadow         : 2px 2px 4px #373a3d;
+}
+
+/*  below ------------------------------------------ CSS for Menu screen */
+
+.container-menu {
+  display : none;
+  position: relative;
+  width   : 600px;
+  margin  : 0 auto;
+}
+
+.title-of-list-menu{
+  position   : absolute;
+  height     : 26px;
+  top        : 37px;
+  left       : 15px;
+  font-size  : 22.5px;
+  font-weight: 500;
+}
+
+.closeBtn  {
+  position        : absolute;
+  top             : 25px;
+  right           : 30px;
+  height          : 50px;
+  width           : 50px;
+  cursor          : pointer;
+  border-radius   : 25px;
+  background-size : cover;
+  background-color: #D57B4A;
+  background-image: url(images/close_menu.svg);
+  box-shadow      : 2px 2px 4px #373a3d;
+}
+
+.menu-list {
+  position                  : relative;
+  padding                   : 10px 0px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius : 2px;
+  background-color          : #F9803B;
+  box-shadow                : 2px 2px 4px #373a3d;
+}
+
+.new-list-name {
+  position        : relative;
+  padding         : 20px;
+  margin          : 10px 5px 15px;
+  background-color: #ffc35e;
+  border-radius      : 2px;
+}
+
+.new-list-name input[type='text'] {
+  height       : 50px;
+  width        : 450px;
+  text-indent  : 10px;
+  font-size    : 15px;
+  font-family  : 'Raleway', sans-serif;
+  border-radius: 2px;
+  box-sizing   : border-box;
+  box-shadow   : inset 2px 2px 4px #373a3d;
+}
+
+.add-list-button {
+  position           : absolute;
+  right              : 65px;
+  top                : 25px;
+  height             : 40px;
+  width              : 40px;
+  cursor             : pointer;
+  background-color   : #ffaa4d;
+  background-image   : url(images/add.svg);
+  background-repeat  : no-repeat;
+  background-size    : 30px;
+  background-position: center;
+  border-radius      : 2px;
+  box-shadow         : 2px 2px 4px #373a3d;
+}
+
+.list-button, .allMyTasks-button {
+  position        : relative;
+  margin          : 5px;
+  height          : 60px;
+  width           : 590px;
+  cursor          : pointer;
+  font-size       : 15px;
+  font-weight     : 500;
+  text-transform  : capitalize;
+  border-radius   : 2px;
+  background-color: #ffc35e;
+  box-shadow      : 2px 2px 4px #373a3d;
+}
+
+.list-name{
+  /* position     : absolute;
+  top      : 20px;
+  left     : 15px; */
+  float    : left;
+  padding  : 20px 0 20px 15px;
+  height   : 20px;
+  width    : fit-content;
+  max-width: 450px;
+}
+
+.numberOfTasks, .numberOfAllTasks {
+  /* position   : relative; */
+  float      : left;
+  padding    : 20px 0;
+  height     : 20px;
+  width      : fit-content;
+  margin-left: 5px;
+}
+
+.delete-list-button {
+  position           : absolute;
+  right              : 25px;
+  top                : 5px;
+  height             : 50px;
+  width              : 50px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 30px;
+  background-color   : #e96330;
+  background-repeat  : no-repeat;
+  background-position: center;
+  background-image   : url(images/delete.svg);
+  box-shadow         : 2px 2px 4px #373a3d;
+}
+
+.logout-button {
+  position           : relative;
+  left               : 30px;
+  height             : 60px;
+  width              : 540px;
+  cursor             : pointer;
+  color              : #EAEAEA;
+  background-size    : 40px;
+  background-color   : #E96330;
+  background-repeat  : no-repeat;
+  background-image   : url(images/logout.svg);
+  background-position: top 10px right 40px;
+  border-radius      : 2px;
+  box-shadow         : 2px 2px 4px #373a3d;
+}
+
+.logout-button h1 {
+  position: absolute;
+  left    : 40px;
+  top     : 1.7px;
+}
+
+/* below ------------------------------CSS for Create/Edit Screen */
+
+.container-create {
+  display: none;
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.taskNameInput {
+  position   : absolute;
+  top        : 25px;
+  left       : 5px;
+  height     : 50px;
+  width      : 480px;
+  text-indent: 10px;
+  font-size  : 22.5px;
+  font-family: 'Raleway', sans-serif;
+  border-radius      : 2px;
+  box-sizing : border-box;
+  box-shadow : inset 2px 2px 4px #373a3d;
+}
+
 .create-favorite[fav="f"], .create-favorite[fav="t"] {
-  height: 40px;
-  width: 40px;
-  background-image: url(images/empty_star.svg);
+  position         : absolute;
+  right            : 10px;
+  top              : 30px;
+  height           : 40px;
+  width            : 40px;
+  cursor           : pointer;
+  background-size  : cover;
   background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
+  background-image : url(images/empty_star.svg);
 }
 
 .create-favorite[fav="t"] {
@@ -233,401 +433,181 @@ h2 {
   background-image: url(images/full_star.svg);
 }
 
-.addATask-button {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 98%;
-  background-color: #E96330;
-  margin: auto;
-  margin-top: 10px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-#addATaskBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/add.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* box-shadow: 1px 1px 4px #1C1C22; */
-  border-radius: 20px;
-  background-color: #E96330;
-  margin: 5px 40px;
-}
-
-/*  below ------------------------------------------ CSS for Menu screen */
-
-.container-menu {
-  display: none;
-  width: 600px;
-  margin: 0 auto;
-}
-
-.title-menu-bar {
-  display: flex;
-  height: 100px;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  box-shadow: 1px -1px 2px 0px #1C1C22;
-}
-
-.closeBtn  {
-  height: 50px;
-  width: 50px;
-  background-image: url(images/close_menu.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 1px 1px 4px #1C1C22;
-  border-radius: 25px;
-  cursor: pointer;
-  background-color: #CF0E22;
-}
-.menu-list {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #F9803B;
-  box-shadow: 1px 1px 2px 0px #1C1C22;
-}
-
-.new-list-name {
-  display: flex;
-  margin: 15px 5px;
-  height: 50px;
-  background-color: #ffc35e;
-  padding: 10px 15px;
-  align-items: center;
-}
-
-.new-list-name input[type='text'] {
-  height: 50px;
-  width: 450px;
-  margin-right: 15px;
-  text-indent: 10px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.submit-list {
-  height: 40px;
-  width: 40px;
-  background-color: #ffaa4d;
-  background-image: url(images/add.svg);
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: center;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-}
-
-.list-button, .allMyTasks-button {
-  justify-content: space-between;
-  display: flex;
-  height: 60px;
-  width: 590px;
-  margin: 5px auto;
-  font-size: 15px;
-  background-color: #ffc35e;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.list-name{
-  padding-left: 15px;
-}
-
-.list-name h3, .numberOfTasks h3 {
-  font-size: 15px;
-}
-
-.numberOfTasks, .numberOfAllTasks {
-  background-color: red;
-  height: 30px;
-  width: 100px;
-  margin-right: 300px;
-}
-
-.delete-list-button {
-  height: 50px;
-  width: 50px;
-  background-color: #e96330;
-  background-image: url(images/delete.svg);
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: center;
-  box-shadow: 1px 1px 4px #1C1C22;
-  cursor: pointer;
-  margin-right: 15px;
-}
-
-.logout-button {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 540px;
-  background-color: #E96330;
-  color: #EAEAEA;
-  margin: auto;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.logout-button h1 {
-  margin-left: 40px;
-}
-#logoutBtn  {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/logout.svg);
-  background-size: cover;
-  border-radius: 20px;
-  margin: 5px 40px;
-}
-
-/* below ------------------------------CSS for Create/Edit Screen */
-
-.container-create {
-  display: none;
-  width: 600px;
-  margin: 0 auto;
-}
-
-.title-create-bar {
-  display: flex;
-  justify-content: space-between;
-  height: 100px;
-  align-items: center;
-  padding: 0px 5px;
-  box-shadow: 1px -1px 2px 0px #1C1C22;
-}
-
-.taskNameInput {
-  width: 480px;
-  height: 50px;
-  text-indent: 10px;
-  font-size: 22.5px;
-  font-family: 'Raleway', sans-serif;
-  box-sizing: border-box;
-}
-
-.taskDone-stopTask-buttons {
-  display: none;
-  /* display: flex; */
-  justify-content: center;
-  padding-top: 15px;
-  background-color: #F9803B;
-  box-shadow: 1px 0px 2px 0px #1C1C22;
+.startTask-taskDone-buttons, .taskDone-stopTask-buttons {
+  display : none;
+  position: relative;
+  height  : 50px;
 }
 
 .taskDone-button {
-  display: flex;
-  justify-content: flex-end;
-  height: 50px;
-  width: 260px;
-  background-color: #FF9344;
-  margin: 1px 5px 10px 5px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
+  position           : relative;
+  height             : 50px;
+  width              : 260px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #FF9344;
+  background-repeat  : no-repeat;
+  background-image   : url(images/checkW.svg);
+  background-position: bottom 5px right 10px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.taskDoneBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/checkW.svg);
-  background-size: cover;
-  margin: 5px 10px 5px 40px;
+.taskDone-stopTask-buttons .taskDone-button {
+  left  : 15px;
+}
+
+.startTask-taskDone-buttons .taskDone-button {
+  left  : 285px;
+  bottom: 60px;
 }
 
 .stopTask-button {
-  display: flex;
-  justify-content: flex-end;
-  height: 50px;
-  width: 260px;
-  background-color: #E96330;
-  margin: 1px 5px 10px 5px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.stopTaskBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/close_menu.svg);
-  background-size: cover;
-  margin: 5px 10px 5px 40px;
-}
-
-.startTask-taskDone-buttons {
-  display: none;
-  justify-content: center;
-  padding-top: 15px;
-  background-color: #F9803B;
-  box-shadow: 1px 0px 2px 0px #1C1C22;
+  position           : relative;
+  left               : 285px;
+  bottom             : 60px;
+  height             : 50px;
+  width              : 260px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #E96330;
+  background-repeat  : no-repeat;
+  background-image   : url(images/close_menu.svg);
+  background-position: bottom 5px right 10px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .startTask-button {
-  display: flex;
-  justify-content: flex-end;
-  height: 50px;
-  width: 260px;
-  background-color: #FF9344;
-  margin: 1px 5px 10px 5px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.startTaskBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/start.svg);
-  background-size: cover;
-  margin: 5px 10px 5px 40px;
+  position           : relative;
+  left               : 15px;
+  height             : 50px;
+  width              : 260px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #FF9344;
+  background-repeat  : no-repeat;
+  background-image   : url(images/start.svg);
+  background-position: bottom 5px right 10px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .reStartTask-button {
-  display: none;
-  position: relative;
-  /* justify-content: center; */
-  padding-top: 15px;
-  background-color: #F9803B;
-  box-shadow: 1px 0px 2px 0px #1C1C22;
+  display            : none;
+  position           : relative;
+  left               : 150px;
+  bottom             : 3px;
+  height             : 50px;
+  width              : 260px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #FF9344;
+  background-repeat  : no-repeat;
+  background-image   : url(images/undone.svg);
+  background-position: bottom 5px right 10px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.reStartTask {
-  /* display: flex;
-  justify-content: flex-end; */
-  /* align-items: center; */
-  /* margin: 1px 5px 10px 5px; */
-  position        : relative;
-  left            : 170px;
-  bottom          : 3px;
-  height          : 50px;
-  width           : 260px;
-  cursor          : pointer;
-  box-shadow      : 1px 1px 4px #1C1C22;
-  background-color: #FF9344;
-}
-
-.reStartTask .title {
+.reStartTask-button .title, .taskDone-button .title, .stopTask-button .title, .startTask-button .title{
   position: absolute;
-  left: 30px;
-  bottom: -2px;
-}
-
-.reStartTaskBtn {
-  position: absolute;
-  right: 10px;
-  bottom: 6px;
-  width: 40px;
-  height: 40px;
-  background-image: url(images/undone.svg);
-  background-size: cover;
-  /* margin: 5px 10px 5px 40px; */
+  left    : 30px;
+  bottom  : -2px;
 }
 
 .form-task {
-  padding: 1px 20px;
+  position        : relative;
+  padding         : 1px 20px 50px;
   background-color: #F9803B;
-  box-shadow: 1px 0px 2px 0px #1C1C22;
+  box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .form-task div {
-  display: flex;
-  margin: auto;
   margin-top: 10px;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .form-task input[type='text'], .form-task select, .form-task input[type='date'] {
-  height: 50px;
-  width: 400px;
-  text-indent: 5px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  box-sizing: border-box;
+  position     : relative;
+  height       : 50px;
+  width        : 400px;
+  text-indent  : 5px;
+  font-size    : 16px;
+  font-family  : 'Raleway', sans-serif;
+  border-radius: 2px;
+  box-sizing   : border-box;
+  box-shadow   : inset 2px 2px 4px #373a3d;
+}
+
+.form-task input[type='text'] {
+  left: 72px;
+}
+
+.form-task select {
+  left: 130px;
+}
+
+.startDateInput {
+  left: 82px;
+}
+
+.deadlineInput {
+  left: 90px;
 }
 
 .remainingDays-display {
+  position  : relative;
+  top       : 10px;
   text-align: center;
-  width: 200px;
 }
 
-.save-cancel-delete-buttons {
-  padding-top: 10px;
-  padding-bottom: 130px;
-  background-color: #F9803B;
-  box-shadow: 1px 1px 2px 0px #1C1C22;
-}
 .save-button {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 560px;
-  background-color: #FE8F46;
-  margin: auto;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.saveBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/save.svg);
-  background-size: cover;
-  border-radius: 20px;
-  margin: 5px 40px;
+  position           : relative;
+  top                : 20px;
+  height             : 60px;
+  width              : 560px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #FE8F46;
+  background-repeat  : no-repeat;
+  background-image   : url(images/save.svg);
+  background-position: top 10px right 40px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .cancel-button {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  width: 560px;
-  background-color: #FFC864;
-  margin: auto;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
-}
-
-.cancelBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/close_menu.svg);
-  background-size: cover;
-  border-radius: 20px;
-  margin: 5px 40px;
+  position           : relative;
+  top                : 25px;
+  height             : 60px;
+  width              : 560px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #FFC864;
+  background-repeat  : no-repeat;
+  background-image   : url(images/close_menu.svg);
+  background-position: top 10px right 40px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .delete-button {
-  display: none;
-  justify-content: space-between;
-  height: 60px;
-  width: 560px;
-  background-color: #e96330;
-  margin: auto;
-  box-shadow: 1px 1px 4px #1C1C22;
-  align-items: center;
-  cursor: pointer;
+  display            : none;
+  position           : relative;
+  top                : 30px;
+  height             : 60px;
+  width              : 560px;
+  cursor             : pointer;
+  border-radius      : 2px;
+  background-size    : 40px;
+  background-color   : #e96330;
+  background-repeat  : no-repeat;
+  background-image   : url(images/delete.svg);
+  background-position: top 10px right 40px;
+  box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.deleteBtn {
-  width: 40px;
-  height: 40px;
-  background-image: url(images/delete.svg);
-  background-size: cover;
-  margin: 5px 40px;
+.addATask-button .title, .save-button .title, .cancel-button .title, .delete-button .title {
+  position: absolute;
+  top     : 2.5px;
 }
