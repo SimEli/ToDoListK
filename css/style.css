@@ -227,19 +227,11 @@ h2 {
 }
 
 .addATask-button {
-  position           : relative;
   top                : 10px;
   left               : 6px;
-  height             : 60px;
   width              : 98%;
-  cursor             : pointer;
-  background-size    : 40px;
   background-color   : #E96330;
-  background-repeat  : no-repeat;
   background-image   : url(images/add.svg);
-  background-position: top 10px right 40px;
-  border-radius      : 2px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 /*  below ------------------------------------------ CSS for Menu screen */
@@ -369,19 +361,11 @@ h2 {
 }
 
 .logout-button {
-  position           : relative;
   left               : 30px;
-  height             : 60px;
   width              : 540px;
-  cursor             : pointer;
   color              : #EAEAEA;
-  background-size    : 40px;
   background-color   : #E96330;
-  background-repeat  : no-repeat;
   background-image   : url(images/logout.svg);
-  background-position: top 10px right 40px;
-  border-radius      : 2px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .logout-button h1 {
@@ -439,18 +423,21 @@ h2 {
   height  : 50px;
 }
 
-.taskDone-button {
+.taskDone-button, .stopTask-button, .startTask-button, .reStartTask-button {
   position           : relative;
   height             : 50px;
   width              : 260px;
   cursor             : pointer;
   border-radius      : 2px;
   background-size    : 40px;
-  background-color   : #FF9344;
   background-repeat  : no-repeat;
-  background-image   : url(images/checkW.svg);
   background-position: bottom 5px right 10px;
   box-shadow         : 2px 2px 4px #373a3d;
+}
+
+.taskDone-button {
+  background-color   : #FF9344;
+  background-image   : url(images/checkW.svg);
 }
 
 .taskDone-stopTask-buttons .taskDone-button {
@@ -463,51 +450,25 @@ h2 {
 }
 
 .stopTask-button {
-  position           : relative;
   left               : 285px;
   bottom             : 60px;
-  height             : 50px;
-  width              : 260px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 40px;
   background-color   : #E96330;
-  background-repeat  : no-repeat;
   background-image   : url(images/close_menu.svg);
-  background-position: bottom 5px right 10px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .startTask-button {
   position           : relative;
   left               : 15px;
-  height             : 50px;
-  width              : 260px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 40px;
   background-color   : #FF9344;
-  background-repeat  : no-repeat;
   background-image   : url(images/start.svg);
-  background-position: bottom 5px right 10px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .reStartTask-button {
   display            : none;
-  position           : relative;
   left               : 150px;
   bottom             : 3px;
-  height             : 50px;
-  width              : 260px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 40px;
   background-color   : #FF9344;
-  background-repeat  : no-repeat;
   background-image   : url(images/undone.svg);
-  background-position: bottom 5px right 10px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .reStartTask-button .title, .taskDone-button .title, .stopTask-button .title, .startTask-button .title{
@@ -561,50 +522,36 @@ h2 {
   text-align: center;
 }
 
-.save-button {
+.save-button, .cancel-button, .delete-button, .logout-button, .addATask-button {
   position           : relative;
-  top                : 20px;
   height             : 60px;
-  width              : 560px;
   cursor             : pointer;
   border-radius      : 2px;
   background-size    : 40px;
-  background-color   : #FE8F46;
   background-repeat  : no-repeat;
-  background-image   : url(images/save.svg);
   background-position: top 10px right 40px;
   box-shadow         : 2px 2px 4px #373a3d;
 }
+.save-button {
+  top                : 20px;
+  width              : 560px;
+  background-color   : #FE8F46;
+  background-image   : url(images/save.svg);
+}
 
 .cancel-button {
-  position           : relative;
   top                : 25px;
-  height             : 60px;
   width              : 560px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 40px;
   background-color   : #FFC864;
-  background-repeat  : no-repeat;
   background-image   : url(images/close_menu.svg);
-  background-position: top 10px right 40px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .delete-button {
   display            : none;
-  position           : relative;
   top                : 30px;
-  height             : 60px;
   width              : 560px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 40px;
   background-color   : #e96330;
-  background-repeat  : no-repeat;
   background-image   : url(images/delete.svg);
-  background-position: top 10px right 40px;
-  box-shadow         : 2px 2px 4px #373a3d;
 }
 
 .addATask-button .title, .save-button .title, .cancel-button .title, .delete-button .title {
