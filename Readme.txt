@@ -18,3 +18,5 @@ mais dans warpcore si. avec hard refresh OK
     --> whitesmoke for "done" = weird
     --> fff3b0 for "started" = not "yellowish"
 ---------------------------------------------------
+put the 4 var inside a function ?
+---------------------------------------------------

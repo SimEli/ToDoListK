@@ -150,18 +150,17 @@ function event_handlers() {
   });
 
   // Click on Task Button, go to Edit task
- $(document).on('click', '.task-button', function(){
-  var taskId = $(this).attr('iid');
-  var listId = $(this).attr('listId');
-  $('.container-main').hide();
-  $('.container-create').show();
-  getTaskAPI(taskId,listId);
-});
+  $(document).on('click', '.task-button', function(){
+    var taskId = $(this).attr('iid');
+    var listId = $(this).attr('listId');
+    $('.container-main').hide();
+    $('.container-create').show();
+    getTaskAPI(taskId,listId);
+  });
 
   // Click on List Button, go to task of this list
   $(document).on('click', '.list-button', function(){
     var listId = $(this).attr('listId');
-    console.log(listId);
     var list = {
       description : $(this).children('.list-name').text()
     };
@@ -171,49 +170,35 @@ function event_handlers() {
   // Delete button action in EDIT
   $(document).on('click', '.delete-button', function() {
     var taskId = $('div').filter('div.form-task').attr('iid');
-    console.log(taskId);
     deleteTaskAPI(taskId);
   });
 
   // "Stop task" button action, display the "Start Task" button in place
   $(document).on('click', '.stopTask-button', function(){
-    var $this = $(this);
-    console.log($this);
+    var thisSelector = $(this);
     var taskId = $('div').filter('div.form-task').attr('iid');
-    // console.log(taskId);
     var listId =$(".select-list option:selected").val();
-    console.log(listId);
-    var task = variableTask($this);
+    var task = variableTask(thisSelector);
 
     editTaskAPI(taskId, task, listId);
-    var status = task['status'];
-    console.log(status);
   });
 
   // 'task done' button action
   $(document).on('click', '.taskDone-button', function(){
-    var $this = $(this);
-    console.log($this);
+    var thisSelector = $(this);
     var taskId = $('div').filter('div.form-task').attr('iid');
-    // console.log(taskId);
     var listId =$(".select-list option:selected").val();
-    console.log(listId);
-    var task = variableTask($this);
+    var task = variableTask(thisSelector);
 
     editTaskAPI(taskId, task, listId);
-    var status = task['status'];
-    console.log(status);
   });
 
   // "Restart Task" button action, display "Stop task" button in place
   $(document).on('click', '.reStartTask-button', function(){
-    var $this = $(this);
-    console.log($this);
+    var thisSelector = $(this);
     var taskId = $('div').filter('div.form-task').attr('iid');
-    console.log(taskId);
     var listId =$(".select-list option:selected").val();
-    console.log(listId);
-    var task = variableTask($this);
+    var task = variableTask(thisSelector);
 
     editTaskAPI(taskId, task, listId);
     var status = task['status'];
@@ -222,13 +207,10 @@ function event_handlers() {
 
   // 'Start Task' button action, display 'Stop task' button in place
   $(document).on('click', '.startTask-button', function(){
-    var $this = $(this);
-    console.log($this);
+    var thisSelector = $(this);
     var taskId = $('div').filter('div.form-task').attr('iid');
-    console.log(taskId);
     var listId =$(".select-list option:selected").val();
-    console.log(listId);
-    var task = variableTask($this);
+    var task = variableTask(thisSelector);
 
     editTaskAPI(taskId, task, listId);
     var status = task['status'];
@@ -239,10 +221,8 @@ function event_handlers() {
   $(document).on('click', '.taskStatus', function(){
     var o={'notStarted':'done','done':'notStarted', 'started':'done'};
     var status=$(this).parents('[status]').attr('status');
-    console.log(status);
     var new_status=o[status];
 
-    console.log(new_status);
     $(this).parents('[status]').attr('status', new_status);
 
     var taskId = $(this).parents('[iid]').attr('iid');
@@ -265,10 +245,8 @@ function event_handlers() {
   $(document).on('click', '.favorite', function(){
     var o={'t':'f','f':'t'};
     var val=$(this).attr('fav');
-
     var new_val=o[val];
 
-    console.log(new_val);
     $(this).attr('fav', new_val);
 
     var taskId = $(this).parents('[iid]').attr('iid');
@@ -281,17 +259,14 @@ function event_handlers() {
   $(document).on('click', '.create-favorite', function(){
     var o={'t':'f','f':'t'}
     var val=$(this).attr('fav')
-
     var new_val=o[val]
 
-    console.log(new_val);
     $(this).attr('fav',new_val);
   });
 
   // Delete list button action in Menu
   $(document).on('click', '.delete-list-button', function(){
     var listId = $(this).parent('[listId]').attr('listId');
-    console.log(listId);
     deleteListAPI(listId);
     return false; //to avoid clicking on list-button too !
   });
@@ -308,13 +283,10 @@ function event_handlers() {
 
   //click to save and CREATE OR EDIT a task 
   $(document).on('click', '.save-button', function() {
-    var $this = $('.form-task');
-    // console.log($this);
+    var thisSelector = $('.form-task');
     var taskId = $('div').filter('div.form-task').attr('iid');
-    // console.log(taskId);
     var listId =$(".select-list option:selected").val();
-    console.log(listId);
-    var task = variableTask($this);
+    var task = variableTask(thisSelector);
 
     if ((task['description'].length != 0) && (listId != "default")) {
       if (taskId == "null") {
@@ -341,7 +313,7 @@ function event_handlers() {
   //this below is end of event_handlers functions
 };
 
-function variableTask($this) {
+function variableTask(thisSelector) {
   return {
     description     : $('.taskNameInput').val(),
     task_description: $('.descriptionInput').val(),
@@ -349,7 +321,7 @@ function variableTask($this) {
     deadline        : $('.deadlineInput').val(),
     favorite        : $('.create-favorite').attr('fav'),
     remaining_days  : $('.form-task').attr('remainingDays'),
-    status          : $this.attr('status'),
+    status          : thisSelector.attr('status'),
     related_list_id : $(".select-list option:selected").val()
   };
 }
@@ -509,8 +481,6 @@ function putListInSelectAPI(listId) {
         $('.select-list').append('<option value="' + data[i]['id'] + '"> ' + data[i]['description'] + '</option>');
         var option = data[i]['id'];
         if (option == listId){
-          console.log(option);
-          console.log(listId);
           $(".select-list option:selected").val('');
           $('.select-list').find('option[value="'+option+'"]').attr("selected",true);
         } else $('.taskNameInput').focus();
@@ -557,13 +527,13 @@ function deleteListAPI(listId) {
     },
     function () {
       $('.delete-list-button').parents('[listId="' + listId + '"]').remove();
-      var taskRelated = $('div').filter('body div.task-button[listId="' + listId + '"]');
+      var taskRelated = $('.task-button[listId="' + listId + '"]');
       console.log(taskRelated);
-      taskRelated.html('');
+      taskRelated.remove();
       // $('.task-button').find('[listId="' + listId + '"]').remove();
+      numberOfAllMyTasks();
     }
     );
-    numberOfAllMyTasks();
 }
 
 function editFavoriteButtonAPI(taskId, value) {
@@ -577,7 +547,6 @@ function editFavoriteButtonAPI(taskId, value) {
         'favorite': value
       }
     }, function () {
-    // $(this).attr('fav',new_val);
     }
   );
 }
