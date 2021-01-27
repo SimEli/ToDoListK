@@ -80,19 +80,19 @@ function paint_containers() {
       <div class="reStartTask-button buttonsStatus" status="started">\
         <h2 class="title">Restart Task</h2>\
       </div>\
-      <div>\
+      <div class="label-input">\
         <label for="description">Description</label>\
         <input type="text" name="description" class="descriptionInput newTaskInput" placeholder="task description">\
       </div>\
-      <div>\
+      <div class="label-input">\
         <label for="list">List</label>\
         <select name="list" class="select-list"></select>\
       </div>\
-      <div>\
+      <div class="label-input">\
         <label for="startDate">Start Date</label>\
         <input type="date" name="startDate" class="startDateInput newTaskInput">\
       </div>\
-      <div>\
+      <div class="label-input">\
         <label for="deadline">Deadline</label>\
         <input type="date" name="deadline" class="deadlineInput newTaskInput">\
       </div>\
@@ -241,6 +241,14 @@ function event_handlers() {
     $(this).siblings('.tooltip').hide();
   });
 
+  // Deadline Button action when NO HOVER on task list
+  $(document).on('click', '.deadlineBtn', function() {
+    var thisTooltip = $(this).siblings('.tooltip');
+    thisTooltip.toggle();
+    remainingDaysInTooltip(thisTooltip);
+    return false;
+  });
+
   // Favorite Button action click on task list
   $(document).on('click', '.favorite', function(){
     var o={'t':'f','f':'t'};
@@ -268,6 +276,7 @@ function event_handlers() {
   $(document).on('click', '.delete-list-button', function(){
     var listId = $(this).parent('[listId]').attr('listId');
     deleteListAPI(listId);
+    numberOfAllMyTasks();
     return false; //to avoid clicking on list-button too !
   });
 
@@ -527,13 +536,10 @@ function deleteListAPI(listId) {
     },
     function () {
       $('.delete-list-button').parents('[listId="' + listId + '"]').remove();
-      var taskRelated = $('.task-button[listId="' + listId + '"]');
-      console.log(taskRelated);
-      taskRelated.remove();
-      // $('.task-button').find('[listId="' + listId + '"]').remove();
-      numberOfAllMyTasks();
+      $('div').filter('div.task-button[listId="' + listId + '"]').remove();
+      // taskRelated.remove();
     }
-    );
+  );
 }
 
 function editFavoriteButtonAPI(taskId, value) {
@@ -587,7 +593,7 @@ function loadingAllMyTasks() {
 };
 
 function numberOfAllMyTasks() {
-  $('.numberOfAllTasks').html('');
+  $('.numberOfAllTasks').remove();
   api.search_item(
     {
       'iclass':'task',
@@ -595,7 +601,7 @@ function numberOfAllMyTasks() {
     },
     {},
     function(data){
-      $(".numberOfAllTasks").text("(" + data.length + ")"); 
+      $(".allMyTasks-button").append("<div class='numberOfAllTasks'>(" + data.length + ")</div>"); 
     }
   );
 };
