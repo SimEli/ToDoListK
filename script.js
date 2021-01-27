@@ -231,21 +231,23 @@ function event_handlers() {
     return false; //to avoid clicking on task-button too !
   });
 
+  // Deadline Button action when NO HOVER on task list
+  $(document).on('click', '.deadlineBtn', function() {
+    var thisTooltip = $(this).siblings('.tooltip');
+    thisTooltip.show();
+    remainingDaysInTooltip(thisTooltip);
+    return false;
+  });
+
   // Deadline Button action hover on task list
   $(document).on('mouseenter', '.deadlineBtn', function() {
     var thisTooltip = $(this).siblings('.tooltip');
     thisTooltip.show();
     remainingDaysInTooltip(thisTooltip);
+    return false;
   });
   $(document).on('mouseleave', '.deadlineBtn', function() {
     $(this).siblings('.tooltip').hide();
-  });
-
-  // Deadline Button action when NO HOVER on task list
-  $(document).on('click', '.deadlineBtn', function() {
-    var thisTooltip = $(this).siblings('.tooltip');
-    thisTooltip.toggle();
-    remainingDaysInTooltip(thisTooltip);
     return false;
   });
 
@@ -472,7 +474,8 @@ function getTaskAPI(taskId,listId) {
       switchButtonsStatus(status);
       remainingDaysInEdit();
       putListInSelectAPI(listId);
-    }
+    },
+      false
   );
 }
 
@@ -536,8 +539,6 @@ function deleteListAPI(listId) {
     },
     function () {
       $('.delete-list-button').parents('[listId="' + listId + '"]').remove();
-      $('div').filter('div.task-button[listId="' + listId + '"]').remove();
-      // taskRelated.remove();
     }
   );
 }
@@ -588,12 +589,13 @@ function loadingAllMyTasks() {
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));
       }
-    }
+    },
+      false
   );
 };
 
 function numberOfAllMyTasks() {
-  $('.numberOfAllTasks').remove();
+  // $('.numberOfAllTasks').html('');
   api.search_item(
     {
       'iclass':'task',
@@ -601,8 +603,9 @@ function numberOfAllMyTasks() {
     },
     {},
     function(data){
-      $(".allMyTasks-button").append("<div class='numberOfAllTasks'>(" + data.length + ")</div>"); 
-    }
+      $('.numberOfAllTasks').text("(" + data.length + ")"); 
+    },
+      false
   );
 };
 

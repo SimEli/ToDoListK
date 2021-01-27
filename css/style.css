@@ -576,7 +576,7 @@ h2 {
   .logout-button, .save-button, .cancel-button, .delete-button {
     left  : 0px;
     width : 90%;
-    margin: 0 5%;
+    margin: 1% 5%;
   }
 
   .taskNameInput {
