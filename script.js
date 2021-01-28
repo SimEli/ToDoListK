@@ -372,19 +372,25 @@ function remainingDaysInEdit() {
   var date0      = new Date(todaysDate);
   var date1      = new Date(startDate);
   var date2      = new Date(deadline);
+  var Difference_In_Time = date2.getTime() - date0.getTime();
+  var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+  setNumberOfDays(Difference_In_Days);
 
     if (date1 < date0 || date2 < date0) {
       alert("Be Careful, you are going in the past..");
       $('.startDateInput').val(todayDate());
       $('.deadlineInput').val(tomorrowDate());
+      setNumberOfDays('1');
     };
     if  (date2 < date1) {
       alert("You cannot start a task after the deadline..");
       $('.startDateInput').val(todayDate());
       $('.deadlineInput').val(tomorrowDate());
+      setNumberOfDays('1');
     };
-  var Difference_In_Time = date2.getTime() - date0.getTime();
-  var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+}
+
+function setNumberOfDays(Difference_In_Days) {
   $(".numberOfDays").text(Difference_In_Days);
   $('.form-task').attr('remainingDays', Difference_In_Days);
   $(".message").text(Difference_In_Days);
