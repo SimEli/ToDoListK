@@ -342,6 +342,7 @@ function clearInputsAndSetDefaultAttributes() {
   $('.create-favorite').attr('fav', 'f');
   $('.form-task').attr({ 'iid': 'null', 'status': 'notStarted', 'remainingDays': 1 });
   $('.buttonsStatus').hide();
+  $(".numberOfDays").text('1');
 }
 
 function todayDate() {
@@ -365,11 +366,24 @@ function tomorrowDate() {
 }
 
 function remainingDaysInEdit() {
-  var todaysDate         = todayDate();
-  var deadline           = $('.deadlineInput').val();
-  var date1              = new Date(todaysDate);
-  var date2              = new Date(deadline);
-  var Difference_In_Time = date2.getTime() - date1.getTime();
+  var todaysDate = todayDate();
+  var startDate  = $('.startDateInput').val();
+  var deadline   = $('.deadlineInput').val();
+  var date0      = new Date(todaysDate);
+  var date1      = new Date(startDate);
+  var date2      = new Date(deadline);
+
+    if (date1 < date0 || date2 < date0) {
+      alert("Be Careful, you are going in the past..");
+      $('.startDateInput').val(todayDate());
+      $('.deadlineInput').val(tomorrowDate());
+    };
+    if  (date2 < date1) {
+      alert("You cannot start a task after the deadline..");
+      $('.startDateInput').val(todayDate());
+      $('.deadlineInput').val(tomorrowDate());
+    };
+  var Difference_In_Time = date2.getTime() - date0.getTime();
   var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
   $(".numberOfDays").text(Difference_In_Days);
   $('.form-task').attr('remainingDays', Difference_In_Days);
@@ -584,7 +598,7 @@ function loadingAllMyTasks() {
       'iclass':'task',
       'search':''
     },
-    {},
+    {'orderby':'deadline ASC'},
     function(data){
       for(var i = 0; i < data.length; i++) {
         $('.list-of-task').append(paintTask(data[i]));

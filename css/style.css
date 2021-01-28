@@ -160,8 +160,8 @@ h2 {
   height       : 26px;
   font-size    : 22.5px;
   font-weight  : 500;
-  width        : fit-content;
-  max-width    : 400px;
+  width        : 380px;
+  /* max-width    : 400px; */
   white-space  : nowrap;
   overflow     : hidden;
   text-overflow: ellipsis;
@@ -172,32 +172,32 @@ h2 {
   position        : absolute;
   top             : 18px;
   right           : 105px;
-  width           : 95px;
-  height          : 24px;
+  width           : 120px;
+  height          : 28px;
   font-size       : 13px;
-  opacity         : 0.5;
+  opacity         : 0.8;
   border-radius   : 4px;
   color           : #f5f5f5;
-  background-color: black;
+  background-color: #201712;
   transition      : all 0.3s ease;
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .message {
   position: absolute;
-  top     : 4px;
-  left    : 11px;
+  top     : 6px;
+  left    : 28px;
 }
 
 .arrow {
   position        : absolute;
-  top             : 10px;
-  right           : -2px;
-  width           : 4px;
-  height          : 4px;
+  top             : 11px;
+  right           : -3px;
+  width           : 6px;
+  height          : 6px;
   transform       : rotate(45deg);
-  background-color: black;
-  box-shadow: 2px 2px 4px #373a3d;
+  background-color: #201712;
+  box-shadow      : 2px -2px 4px #373a3d;
 }
 
 .deadlineBtn {
@@ -565,6 +565,18 @@ h2 {
     margin: 2% 3%;
   }
 
+  .task-name {
+    width: 60%;
+  }
+
+  .tooltip {
+    width: 25%;
+  }
+
+  .message {
+    left: 19%;
+  }
+
   .new-list-name input[type='text'] {
     width: 80%;
   }
@@ -625,7 +637,7 @@ h2 {
   }
 
   .deadlineBtn {
-    right: 40px;
+    right: 33px;
   }
 
   .addATask-button, .logout-button, .save-button, .cancel-button, .delete-button {
@@ -679,20 +691,19 @@ h2 {
   }
 
   .tooltip {
-    top: 10px;
-    right: 65px;
-    width: 82px;
-    height: 18px;
+    top      : 10px;
+    right    : 65px;
+    width    : 25%;
+    height   : 18px;
     font-size: 11px;
   }
 
   .message {
-    top: 3px;
-    left: 10px;
+    left: 17%;
+    top : 2px;
   }
 
   .arrow {
-    top: 7px;
-
+    top: 6px;
   }
 }
