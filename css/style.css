@@ -62,14 +62,14 @@ h2 {
 }
 
 /* below -------------------------CSS for Main screen */
-.container-main, .container-menu, .container-create {
+.container_main, .container_menu, .container_create {
   display : none;
   position: relative;
   width   : 600px;
   margin  : 0 auto;
 }
 
-.title-main-bar, .title-menu-bar, .title-create-bar {
+.title_main_bar, .title_menu_bar, .title_create_bar {
   position               : relative;
   height                 : 100px;
   text-transform         : capitalize;
@@ -78,16 +78,20 @@ h2 {
   box-shadow             : 2px 2px 4px #373a3d;
 }
 
-.title-of-list {
-  position   : absolute;
-  height     : 26px;
-  top        : 37px;
-  left       : 15px;
-  font-size  : 22.5px;
-  font-weight: 500;
+.title_of_list {
+  position     : absolute;
+  height       : 26px;
+  width        : 500px;
+  top          : 37px;
+  left         : 15px;
+  font-size    : 22.5px;
+  font-weight  : 500;
+  white-space  : nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
 }
 
-.menuBtn {
+.menu_btn {
   position        : absolute;
   top             : 25px;
   right           : 30px;
@@ -101,7 +105,7 @@ h2 {
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.task-list {
+.task_list {
   position                  : relative;
   padding-top               : 10px;
   padding-bottom            : 20px;
@@ -111,7 +115,7 @@ h2 {
   box-shadow                : 2px 2px 4px #373a3d;
 }
 
-.task-button {
+.task_button {
   position        : relative;
   margin          : 5px 15px;
   height          : 60px;
@@ -122,7 +126,7 @@ h2 {
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.task-button[status="notStarted"] .taskStatus, .task-button[status="started"] .taskStatus, .task-button[status="done"] .taskStatus {
+.task_button[status="not_started"] .task_status, .task_button[status="started"] .task_status, .task_button[status="done"] .task_status {
   position         : absolute;
   left             : 15px;
   top              : 10px;
@@ -134,34 +138,33 @@ h2 {
   background-image : url(images/not_check.svg);
 }
 
-.has_hover .task-button .taskStatus:hover {
+.has_hover .task_button .task_status:hover {
   background-image: url(images/check.svg);
 }
 
-.task-button[status="done"] .taskStatus {
+.task_button[status="done"] .task_status {
   background-image: url(images/check.svg);
 }
 
-.task-button[status="done"]{
+.task_button[status="done"]{
   background-color: whitesmoke;
   opacity         : 0.7;
   filter          : blur(0.7px);
 }
 /* how to make all div even SVG more grey ?! */
 
-.task-button[status="started"] {
+.task_button[status="started"] {
   background-color: #fff3b0;
 }
 
-.task-name {  
+.task_name {  
   position     : absolute;
   top          : 17px;
   left         : 75px;
+  width        : 380px;
   height       : 26px;
   font-size    : 22.5px;
   font-weight  : 500;
-  width        : 380px;
-  /* max-width    : 400px; */
   white-space  : nowrap;
   overflow     : hidden;
   text-overflow: ellipsis;
@@ -200,7 +203,7 @@ h2 {
   box-shadow      : 2px -2px 4px #373a3d;
 }
 
-.deadlineBtn {
+.deadline_btn {
   position         : absolute;
   top              : 10px;
   right            : 60px;
@@ -232,7 +235,7 @@ h2 {
   background-image: url(images/full_star.svg);
 }
 
-.addATask-button {
+.add_a_task_button {
   top             : 10px;
   width           : 98%;
   margin          : 1%;
@@ -242,7 +245,7 @@ h2 {
 
 /*  below ------------------------------------------ CSS for Menu screen */
 
-.title-of-list-menu{
+.title_of_list_menu{
   position   : absolute;
   height     : 26px;
   top        : 37px;
@@ -251,7 +254,7 @@ h2 {
   font-weight: 500;
 }
 
-.closeBtn  {
+.close_btn  {
   position        : absolute;
   top             : 25px;
   right           : 30px;
@@ -265,7 +268,7 @@ h2 {
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.menu-list {
+.menu_list {
   position                  : relative;
   padding                   : 10px 0px;
   border-bottom-right-radius: 2px;
@@ -274,15 +277,15 @@ h2 {
   box-shadow                : 2px 2px 4px #373a3d;
 }
 
-.new-list-name {
+.new_list_name {
   position        : relative;
   padding         : 20px;
   margin          : 10px 5px 15px;
   background-color: #ffc35e;
-  border-radius      : 2px;
+  border-radius   : 2px;
 }
 
-.new-list-name input[type='text'] {
+.new_list_name input[type='text'] {
   height       : 50px;
   width        : 450px;
   text-indent  : 10px;
@@ -293,7 +296,7 @@ h2 {
   box-shadow   : inset 2px 2px 4px #373a3d;
 }
 
-.add-list-button {
+.add_list_button {
   position           : absolute;
   right              : 65px;
   top                : 25px;
@@ -309,7 +312,7 @@ h2 {
   box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.list-button, .allMyTasks-button {
+.list_button, .all_my_tasks_button {
   position        : relative;
   margin          : 5px;
   height          : 60px;
@@ -323,15 +326,18 @@ h2 {
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.list-name{
-  float    : left;
-  padding  : 20px 0 20px 15px;
-  height   : 20px;
-  width    : fit-content;
-  max-width: 450px;
+.list_name{
+  float        : left;
+  padding      : 20px 0 20px 15px;
+  height       : 20px;
+  width        : fit-content;
+  max-width    : 400px;
+  white-space  : nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
 }
 
-.numberOfTasks, .numberOfAllTasks {
+.number_of_tasks, .number_of_all_tasks {
   float      : left;
   padding    : 20px 0;
   height     : 20px;
@@ -339,7 +345,7 @@ h2 {
   margin-left: 5px;
 }
 
-.delete-list-button {
+.delete_list_button {
   position           : absolute;
   right              : 25px;
   top                : 5px;
@@ -355,7 +361,7 @@ h2 {
   box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.logout-button {
+.logout_button {
   left               : 30px;
   width              : 540px;
   color              : #EAEAEA;
@@ -363,15 +369,18 @@ h2 {
   background-image   : url(images/logout.svg);
 }
 
-.logout-button h1 {
-  position: absolute;
-  left    : 40px;
-  top     : 1.9px;
+.logout_text {
+  position   : absolute;
+  left       : 40px;
+  top        : 17px;
+  height     : 26px;
+  font-size  : 22.5px;
+  font-weight: 500;
 }
 
 /* below ------------------------------CSS for Create/Edit Screen */
 
-.taskNameInput {
+.task_name_input {
   position   : absolute;
   top        : 25px;
   left       : 5px;
@@ -385,7 +394,7 @@ h2 {
   box-shadow : inset 2px 2px 4px #373a3d;
 }
 
-.create-favorite[fav="f"], .create-favorite[fav="t"] {
+.create_favorite[fav="f"], .create_favorite[fav="t"] {
   position         : absolute;
   right            : 10px;
   top              : 30px;
@@ -397,15 +406,15 @@ h2 {
   background-image : url(images/empty_star.svg);
 }
 
-.create-favorite[fav="t"] {
+.create_favorite[fav="t"] {
   background-image: url(images/full_star.svg);
 }
 
-.has_hover .create-favorite:hover {
+.has_hover .create_favorite:hover {
   background-image: url(images/full_star.svg);
 }
 
-.startTask-taskDone-buttons, .taskDone-stopTask-buttons {
+.start_task_task_done_buttons, .task_done_stop_task_buttons {
   display : none;
   position: relative;
   height  : 50px;
@@ -413,7 +422,7 @@ h2 {
   margin  : 15px auto 15px;
 }
 
-.taskDone-button, .stopTask-button, .startTask-button, .reStartTask-button {
+.task_done_btn, .stop_task_btn, .start_task_btn, .restart_task_btn {
   position           : relative;
   height             : 50px;
   width              : 260px;
@@ -425,36 +434,36 @@ h2 {
   box-shadow         : 2px 2px 4px #373a3d;
 }
 
-.taskDone-button {
+.task_done_btn {
   background-color   : #FF9344;
   background-image   : url(images/checkW.svg);
 }
 
-.taskDone-stopTask-buttons .taskDone-button {
+.task_done_stop_task_buttons .task_done_btn {
   float : left;
   margin: 0;
 }
 
-.startTask-taskDone-buttons .taskDone-button {
+.start_task_task_done_buttons .task_done_btn {
   float : right;
   margin: 0;
 }
 
-.stopTask-button {
+.stop_task_btn {
   float           : right;
   margin          : 0;
   background-color: #E96330;
   background-image: url(images/close_menu.svg);
 }
 
-.startTask-button {
+.start_task_btn {
   float           : left;
   margin          : 0;
   background-color: #FF9344;
   background-image: url(images/start.svg);
 }
 
-.reStartTask-button {
+.restart_task_btn {
   display         : none;
   left            : 150px;
   margin          : 15px 0;
@@ -462,30 +471,30 @@ h2 {
   background-image: url(images/undone.svg);
 }
 
-.reStartTask-button .title, .taskDone-button .title, .stopTask-button .title, .startTask-button .title{
+.restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
   position: absolute;
   left    : 30px;
   bottom  : -2px;
 }
 
-.form-task {
+.form_task {
   position        : relative;
   padding         : 1px 20px 50px;
   background-color: #F9803B;
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.label-input {
+.label_input {
   height: 50px;
   margin-top: 10px;
 }
 
-.label-input label {
+.label_input label {
   float: left;
   padding: 15px 0;
 }
 
-.form-task input[type='text'], .form-task select, .form-task input[type='date'] {
+.form_task input[type='text'], .form_task select, .form_task input[type='date'] {
   float: right;
   height       : 50px;
   width        : 400px;
@@ -497,7 +506,7 @@ h2 {
   box-shadow   : inset 2px 2px 4px #373a3d;
 }
 
-.remainingDays-display {
+.remaining_days_display {
   position     : relative;
   top          : 10px;
   text-align   : center;
@@ -505,7 +514,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-.save-button, .cancel-button, .delete-button, .logout-button, .addATask-button {
+.save_button, .cancel_button, .delete_button, .logout_button, .add_a_task_button {
   position           : relative;
   height             : 60px;
   cursor             : pointer;
@@ -515,7 +524,7 @@ h2 {
   background-position: top 10px right 40px;
   box-shadow         : 2px 2px 4px #373a3d;
 }
-.save-button {
+.save_button {
   top             : 20px;
   width           : 560px;
   margin-top      : 10px;
@@ -523,7 +532,7 @@ h2 {
   background-image: url(images/save.svg);
 }
 
-.cancel-button {
+.cancel_button {
   top             : 25px;
   width           : 560px;
   margin-top      : 10px;
@@ -531,7 +540,7 @@ h2 {
   background-image: url(images/close_menu.svg);
 }
 
-.delete-button {
+.delete_button {
   display         : none;
   top             : 30px;
   width           : 560px;
@@ -540,7 +549,7 @@ h2 {
   background-image: url(images/delete.svg);
 }
 
-.addATask-button .title, .save-button .title, .cancel-button .title, .delete-button .title {
+.add_a_task_button .title, .save_button .title, .cancel_button .title, .delete_button .title {
   position: absolute;
   top     : 2.5px;
 }
@@ -556,16 +565,20 @@ h2 {
     width: 70%;
   }
 
-  .container-main, .container-menu, .container-create {
+  .container_main, .container_menu, .container_create {
     width: 95%;
   }
 
-  .task-button, .list-button, .allMyTasks-button {
+  .task_button, .list_button, .all_my_tasks_button {
     width : auto;
     margin: 2% 3%;
   }
 
-  .task-name {
+  .title_of_list {
+    max-width: 80%;
+  }
+
+  .task_name {
     width: 60%;
   }
 
@@ -577,38 +590,42 @@ h2 {
     left: 19%;
   }
 
-  .new-list-name input[type='text'] {
+  .new_list_name input[type='text'] {
     width: 80%;
   }
 
-  .add-list-button {
+  .add_list_button {
     right: 10%;
   }
 
-  .logout-button, .save-button, .cancel-button, .delete-button {
+  .list_name {
+    max-width: 69%;
+  }
+
+  .logout_button, .save_button, .cancel_button, .delete_button {
     left  : 0px;
     width : 90%;
     margin: 1% 5%;
   }
 
-  .taskNameInput {
+  .task_name_input {
     width: 80%;
   }
 
-  .form-task input[type='text'], .form-task select, .form-task input[type='date'] {
+  .form_task input[type='text'], .form_task select, .form_task input[type='date'] {
     width: 70%;
   }
 
-  .taskDone-button, .stopTask-button, .startTask-button, .reStartTask-button {
+  .task_done_btn, .stop_task_btn, .start_task_btn, .restart_task_btn {
     width              : 48%;
     background-position: bottom 5px right 5px;
   }
 
-  .startTask-taskDone-buttons, .taskDone-stopTask-buttons {
+  .start_task_task_done_buttons, .task_done_stop_task_buttons {
     width: 90%;
   }
 
-  .reStartTask-button .title, .taskDone-button .title, .stopTask-button .title, .startTask-button .title{
+  .restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
     margin-left: 15%;
     left       : 0;
   }
@@ -616,75 +633,90 @@ h2 {
 }
 
 @media(max-width: 475px) {
-  .container-main, .container-menu, .container-create {
+  .container_main, .container_menu, .container_create {
     width: 100%;
   }
 
-  .task-button, .list-button, .allMyTasks-button {
+  .title_of_list {
+    max-width: 70%;
+    font-style: 19px;
+  }
+
+  .menu_btn, .close_btn {
+    height: 40px;
+    width: 40px;
+  }
+
+  .task_button, .list_button, .all_my_tasks_button {
     height: 40px;
   }
 
-  .task-button[status="notStarted"] .taskStatus, .task-button[status="started"] .taskStatus, .task-button[status="done"] .taskStatus, .deadlineBtn, .favorite[fav="f"], .favorite[fav="t"] {
+  .task_button[status="not_started"] .task_status, .task_button[status="started"] .task_status, .task_button[status="done"] .task_status, .deadline_btn, .favorite[fav="f"], .favorite[fav="t"] {
     height: 20px;
     width: 20px;
   }
 
-  .task-name {
+  .task_name {
     font-size: 18px;
     height   : 20px;
     top      : 10px;
     left     : 50px;
   }
 
-  .deadlineBtn {
+  .deadline_btn {
     right: 33px;
   }
 
-  .addATask-button, .logout-button, .save-button, .cancel-button, .delete-button {
+  .add_a_task_button, .logout_button, .save_button, .cancel_button, .delete_button {
     height             : 50px;
     background-size    : 30px;
     background-position: top 10px right 30px;
   }
 
-  .addATask-button .title, .save-button .title, .cancel-button .title, .delete-button .title {
+  .add_a_task_button .title, .save_button .title, .cancel_button .title, .delete_button .title {
     top: -2.5px;
   }
 
-  .add-list-button {
-    right: 5%;
+  .new_list_name input[type='text'] {
+    height: 40px;
   }
 
-  .list-name {
+  .add_list_button {
+    height: 30px;
+    width: 30px;
+    background-size: 20px;
+  }
+
+  .list_name {
     padding: 10px 0 10px 10px;
   }
 
-  .numberOfTasks, .numberOfAllTasks {
+  .number_of_tasks, .number_of_all_tasks {
     padding: 10px 0;
   }
 
-  .delete-list-button{
+  .delete_list_button{
     right          : 15px;
     height         : 30px;
     width          : 30px;
     background-size: 20px;
   }
 
-  .logout-button .title {
+  .logout_text {
     left: 30px;
-    top : -3px;
+    top : 12px;
   }
 
-  .form-task {
+  .form_task {
     padding: 1px 10px 50px;
   }
-  
-  
-  .reStartTask-button .title, .taskDone-button .title, .stopTask-button .title, .startTask-button .title{
+
+  .restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
     margin-left: 5%;
     left       : 0;
   }
 
-  .taskDone-button, .stopTask-button, .startTask-button, .reStartTask-button {
+  .task_done_btn, .stop_task_btn, .start_task_btn, .restart_task_btn {
     width              : 48%;
     background-size    : 30px;
     background-position: bottom 10px right 5px;
