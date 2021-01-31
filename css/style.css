@@ -7,10 +7,7 @@ html, body {
   background-position  : right;
 }
 
-h1 {
-  font-size: 22.5px;
-}
-/* h2 to apply also in save and cancel bar (create) */
+
 h2 {
   margin-left: 40px;
   font-size  : 19.5px;
@@ -146,12 +143,13 @@ h2 {
   background-image: url(images/check.svg);
 }
 
-.task_button[status="done"]{
+.task_button[status="done"] {
   background-color: whitesmoke;
-  opacity         : 0.7;
-  filter          : blur(0.7px);
 }
-/* how to make all div even SVG more grey ?! */
+
+.task_button[status="done"] > div {
+  opacity         : 0.5;
+}
 
 .task_button[status="started"] {
   background-color: #fff3b0;
@@ -270,7 +268,7 @@ h2 {
 
 .menu_list {
   position                  : relative;
-  padding                   : 10px 0px;
+  padding                   : 10px 0px 30px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius : 2px;
   background-color          : #F9803B;
@@ -362,20 +360,11 @@ h2 {
 }
 
 .logout_button {
-  left               : 30px;
-  width              : 540px;
-  color              : #EAEAEA;
-  background-color   : #E96330;
-  background-image   : url(images/logout.svg);
-}
-
-.logout_text {
-  position   : absolute;
-  left       : 40px;
-  top        : 17px;
-  height     : 26px;
-  font-size  : 22.5px;
-  font-weight: 500;
+  top             : 15px;
+  left            : 30px;
+  width           : 540px;
+  background-color: #E96330;
+  background-image: url(images/logout.svg);
 }
 
 /* below ------------------------------CSS for Create/Edit Screen */
@@ -471,12 +460,6 @@ h2 {
   background-image: url(images/undone.svg);
 }
 
-.restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
-  position: absolute;
-  left    : 30px;
-  bottom  : -2px;
-}
-
 .form_task {
   position        : relative;
   padding         : 1px 20px 50px;
@@ -549,9 +532,24 @@ h2 {
   background-image: url(images/delete.svg);
 }
 
-.add_a_task_button .title, .save_button .title, .cancel_button .title, .delete_button .title {
-  position: absolute;
-  top     : 2.5px;
+.text_in_button {
+  position   : absolute;
+  top        : 17px;
+  left       : 40px;
+  height     : 26px;
+  font-size  : 19.5px;
+  font-weight: 500;
+  color      : #EAEAEA;
+}
+
+.logout_text {
+  font-size  : 22.5px;
+}
+
+.status_btn {
+  top  : 12px;
+  left : 80px;
+  width: 100px;
 }
 
 /* media queries below */
@@ -625,9 +623,8 @@ h2 {
     width: 90%;
   }
 
-  .restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
-    margin-left: 15%;
-    left       : 0;
+  .status_btn {
+    left: 15%;
   }
 
 }
@@ -673,8 +670,8 @@ h2 {
     background-position: top 10px right 30px;
   }
 
-  .add_a_task_button .title, .save_button .title, .cancel_button .title, .delete_button .title {
-    top: -2.5px;
+  .text_in_button {
+    top: 12px;
   }
 
   .new_list_name input[type='text'] {
@@ -702,18 +699,12 @@ h2 {
     background-size: 20px;
   }
 
-  .logout_text {
-    left: 30px;
-    top : 12px;
-  }
-
   .form_task {
     padding: 1px 10px 50px;
   }
 
-  .restart_task_btn .title, .task_done_btn .title, .stop_task_btn .title, .start_task_btn .title{
-    margin-left: 5%;
-    left       : 0;
+  .status_btn {
+    left: 10%;
   }
 
   .task_done_btn, .stop_task_btn, .start_task_btn, .restart_task_btn {

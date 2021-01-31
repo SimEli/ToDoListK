@@ -9,7 +9,9 @@ padstart pour day month DAte OPtional
 function count 10 - 15 lines max
 ---------------------------------------------------
 
-OPACITY SUR BTN EN PLUS DE TASK BTN
+
+mettre TASKID = TASK[ID] dans api;edit et retireer de variable_task
+pour utiliser sans id dans variable_task dans Create !
 ---------------------------------------------------
 fct dynamique pour contenu html  taskDone restart etc aussi startDateinput
 ---------------------------------------------------
@@ -17,11 +19,13 @@ show_state(state_name)
  .container . hide
 ('.' + state_name).show;
 ---------------------------------------------------
-pas de H2 ou h1
+regrouper box shadow et border radius
 ---------------------------------------------------
 dans CSS classe button pour DRY 
 ---------------------------------------------------
-tirer console log
+
+
+
 ---------------------------------------------------
 check si fusion Task et Changes dans Create/Edit changes: task 
 ok pour edit pas create a cause de ID =null

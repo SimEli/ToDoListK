@@ -14,7 +14,7 @@ function on_init_lists(){
     event_handlers();
     loading_all_my_tasks();
 }
-
+//! br after list_of_list..
 function paint_containers() {
   return ('\
   <!-- content of main screen (all my tasks) below -->\
@@ -27,7 +27,7 @@ function paint_containers() {
         <div class="list_of_task">\
         </div>\
         <div class="add_a_task_button">\
-          <h2 class="title">Add a Task</h2>\
+          <div class="text_in_button">Add a Task</div>\
         </div>\
       </div>\
   </div>\
@@ -44,9 +44,8 @@ function paint_containers() {
       </div>\
       <div class="list_of_list">\
       </div>\
-      <br>\
       <div class="logout_button">\
-        <div class="logout_text">Logout</div>\
+        <div class="logout_text text_in_button">Logout</div>\
       </div>\
     </div>\
   </div>\
@@ -59,22 +58,22 @@ function paint_containers() {
     <div class="form_task" iid= "null" status="not_started">\
       <div class="task_done_stop_task_buttons buttons_status">\
         <div class="task_done_btn" status="done">\
-          <h2 class="title">Task Done</h2>\
+          <div class="text_in_button status_btn">Task Done</div>\
         </div>\
         <div class="stop_task_btn" status="not_started">\
-          <h2 class="title">Stop Task</h2>\
+          <div class="text_in_button status_btn">Stop Task</div>\
         </div>\
       </div>\
       <div class="start_task_task_done_buttons buttons_status">\
         <div class="start_task_btn" status="started">\
-          <h2 class="title">Start Task</h2>\
+          <div class="text_in_button status_btn">Start Task</div>\
         </div>\
         <div class="task_done_btn" status="done">\
-          <h2 class="title">Task Done</h2>\
+          <div class="text_in_button status_btn">Task Done</div>\
         </div>\
       </div>\
       <div class="restart_task_btn buttons_status" status="started">\
-        <h2 class="title">Restart Task</h2>\
+        <div class="text_in_button status_btn">Restart Task</div>\
       </div>\
       <div class="label_input">\
         <label for="description">Description</label>\
@@ -94,13 +93,13 @@ function paint_containers() {
       </div>\
       <div class="remaining_days_display">Remaining Time: <span class="number_of_days">1</span> day(s)</div>\
       <div class="save_button">\
-        <h2 class="title">Save</h2>\
+        <div class="text_in_button">Save</div>\
       </div>\
       <div class="cancel_button">\
-        <h2 class="title">Cancel</h2>\
+        <div class="text_in_button">Cancel</div>\
       </div>\
       <div class="delete_button buttons_status">\
-        <h2 class="title">Delete</h2>\
+        <div class="text_in_button">Delete</div>\
       </div>\
     </div>\
   </div>');
@@ -348,7 +347,6 @@ function create_task_api(task) {
       }
     }, function (task_id) {
       task['id'] = task_id;
-      console.log(task_id);
       $('.list_of_task').append(paint_task(task));
       $('.container_create').hide();
       $('.container_main').show();
