@@ -59,7 +59,7 @@ h2 {
 }
 
 /* below -------------------------CSS for Main screen */
-.container_main, .container_menu, .container_create {
+.container {
   display : none;
   position: relative;
   width   : 600px;
@@ -75,7 +75,7 @@ h2 {
   box-shadow             : 2px 2px 4px #373a3d;
 }
 
-.title_of_list {
+.title_of_list, .title_of_list_menu {
   position     : absolute;
   height       : 26px;
   width        : 500px;
@@ -89,6 +89,10 @@ h2 {
 }
 
 .menu_btn {
+  background-image: url(images/menu.svg);
+}
+
+.menu_btn, .close_btn {
   position        : absolute;
   top             : 25px;
   right           : 30px;
@@ -98,7 +102,6 @@ h2 {
   border-radius   : 25px;
   background-size : cover;
   background-color: #D57B4A;
-  background-image: url(images/menu.svg);
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
@@ -123,16 +126,20 @@ h2 {
   box-shadow      : 2px 2px 4px #373a3d;
 }
 
-.task_button[status="not_started"] .task_status, .task_button[status="started"] .task_status, .task_button[status="done"] .task_status {
+.task_button[status="not_started"] .task_status, .task_button[status="started"] .task_status, .task_button[status="done"] .task_status, .deadline_btn, .favorite[fav="f"], .favorite[fav="t"] {
   position         : absolute;
-  left             : 15px;
   top              : 10px;
   height           : 40px;
   width            : 40px;
   cursor           : pointer;
   background-size  : cover;
   background-repeat: no-repeat;
-  background-image : url(images/not_check.svg);
+}
+
+
+.task_button[status="not_started"] .task_status, .task_button[status="started"] .task_status, .task_button[status="done"] .task_status {
+  left            : 15px;
+  background-image: url(images/not_check.svg);
 }
 
 .has_hover .task_button .task_status:hover {
@@ -202,27 +209,13 @@ h2 {
 }
 
 .deadline_btn {
-  position         : absolute;
-  top              : 10px;
-  right            : 60px;
-  height           : 40px;
-  width            : 40px;
-  cursor           : pointer;
-  background-size  : cover;
-  background-repeat: no-repeat;
-  background-image : url(images/time.svg);
+  right           : 60px;
+  background-image: url(images/time.svg);
 }
 
 .favorite[fav="f"], .favorite[fav="t"] {
-  position         : absolute;
-  top              : 10px;
-  right            : 10px;
-  height           : 40px;
-  width            : 40px;
-  cursor           : pointer;
-  background-size  : cover;
-  background-repeat: no-repeat;
-  background-image : url(images/empty_star.svg);
+  right           : 10px;
+  background-image: url(images/empty_star.svg);
 }
 
 .favorite[fav="t"] {
@@ -243,27 +236,8 @@ h2 {
 
 /*  below ------------------------------------------ CSS for Menu screen */
 
-.title_of_list_menu{
-  position   : absolute;
-  height     : 26px;
-  top        : 37px;
-  left       : 15px;
-  font-size  : 22.5px;
-  font-weight: 500;
-}
-
 .close_btn  {
-  position        : absolute;
-  top             : 25px;
-  right           : 30px;
-  height          : 50px;
-  width           : 50px;
-  cursor          : pointer;
-  border-radius   : 25px;
-  background-size : cover;
-  background-color: #D57B4A;
   background-image: url(images/close_menu.svg);
-  box-shadow      : 2px 2px 4px #373a3d;
 }
 
 .menu_list {
@@ -294,20 +268,23 @@ h2 {
   box-shadow   : inset 2px 2px 4px #373a3d;
 }
 
-.add_list_button {
+.add_list_button, .delete_list_button {
   position           : absolute;
-  right              : 65px;
-  top                : 25px;
-  height             : 40px;
-  width              : 40px;
   cursor             : pointer;
-  background-color   : #ffaa4d;
-  background-image   : url(images/add.svg);
   background-repeat  : no-repeat;
   background-size    : 30px;
   background-position: center;
   border-radius      : 2px;
   box-shadow         : 2px 2px 4px #373a3d;
+}
+
+.add_list_button {
+  right           : 65px;
+  top             : 25px;
+  height          : 40px;
+  width           : 40px;
+  background-color: #ffaa4d;
+  background-image: url(images/add.svg);
 }
 
 .list_button, .all_my_tasks_button {
@@ -344,19 +321,12 @@ h2 {
 }
 
 .delete_list_button {
-  position           : absolute;
-  right              : 25px;
-  top                : 5px;
-  height             : 50px;
-  width              : 50px;
-  cursor             : pointer;
-  border-radius      : 2px;
-  background-size    : 30px;
-  background-color   : #e96330;
-  background-repeat  : no-repeat;
-  background-position: center;
-  background-image   : url(images/delete.svg);
-  box-shadow         : 2px 2px 4px #373a3d;
+  right           : 25px;
+  top             : 5px;
+  height          : 50px;
+  width           : 50px;
+  background-color: #e96330;
+  background-image: url(images/delete.svg);
 }
 
 .logout_button {
@@ -370,17 +340,17 @@ h2 {
 /* below ------------------------------CSS for Create/Edit Screen */
 
 .task_name_input {
-  position   : absolute;
-  top        : 25px;
-  left       : 5px;
-  height     : 50px;
-  width      : 480px;
-  text-indent: 10px;
-  font-size  : 22.5px;
-  font-family: 'Raleway', sans-serif;
-  border-radius      : 2px;
-  box-sizing : border-box;
-  box-shadow : inset 2px 2px 4px #373a3d;
+  position     : absolute;
+  top          : 25px;
+  left         : 5px;
+  height       : 50px;
+  width        : 480px;
+  text-indent  : 10px;
+  font-size    : 22.5px;
+  font-family  : 'Raleway', sans-serif;
+  border-radius: 2px;
+  box-sizing   : border-box;
+  box-shadow   : inset 2px 2px 4px #373a3d;
 }
 
 .create_favorite[fav="f"], .create_favorite[fav="t"] {
@@ -478,7 +448,7 @@ h2 {
 }
 
 .form_task input[type='text'], .form_task select, .form_task input[type='date'] {
-  float: right;
+  float        : right;
   height       : 50px;
   width        : 400px;
   text-indent  : 5px;
@@ -507,18 +477,20 @@ h2 {
   background-position: top 10px right 40px;
   box-shadow         : 2px 2px 4px #373a3d;
 }
+
+.save_button, .cancel_button, .delete_button {
+  width     : 560px;
+  margin-top: 10px;
+}
+
 .save_button {
   top             : 20px;
-  width           : 560px;
-  margin-top      : 10px;
   background-color: #FE8F46;
   background-image: url(images/save.svg);
 }
 
 .cancel_button {
   top             : 25px;
-  width           : 560px;
-  margin-top      : 10px;
   background-color: #FFC864;
   background-image: url(images/close_menu.svg);
 }
@@ -526,8 +498,6 @@ h2 {
 .delete_button {
   display         : none;
   top             : 30px;
-  width           : 560px;
-  margin-top      : 10px;
   background-color: #e96330;
   background-image: url(images/delete.svg);
 }
@@ -543,13 +513,13 @@ h2 {
 }
 
 .logout_text {
-  font-size  : 22.5px;
+  font-size: 22.5px;
 }
 
 .status_btn {
   top  : 12px;
   left : 80px;
-  width: 100px;
+  width: 120px;
 }
 
 /* media queries below */
@@ -563,7 +533,7 @@ h2 {
     width: 70%;
   }
 
-  .container_main, .container_menu, .container_create {
+  .container {
     width: 95%;
   }
 
@@ -572,7 +542,7 @@ h2 {
     margin: 2% 3%;
   }
 
-  .title_of_list {
+  .title_of_list, .title_of_list_menu {
     max-width: 80%;
   }
 
@@ -630,13 +600,13 @@ h2 {
 }
 
 @media(max-width: 475px) {
-  .container_main, .container_menu, .container_create {
+  .container {
     width: 100%;
   }
 
-  .title_of_list {
+  .title_of_list, .title_of_list_menu {
     max-width: 70%;
-    font-style: 19px;
+    font-size: 19px;
   }
 
   .menu_btn, .close_btn {
@@ -678,7 +648,7 @@ h2 {
     height: 40px;
   }
 
-  .add_list_button {
+  .add_list_button, .delete_list_button {
     height: 30px;
     width: 30px;
     background-size: 20px;
@@ -693,10 +663,7 @@ h2 {
   }
 
   .delete_list_button{
-    right          : 15px;
-    height         : 30px;
-    width          : 30px;
-    background-size: 20px;
+    right: 15px;
   }
 
   .form_task {
@@ -708,7 +675,6 @@ h2 {
   }
 
   .task_done_btn, .stop_task_btn, .start_task_btn, .restart_task_btn {
-    width              : 48%;
     background-size    : 30px;
     background-position: bottom 10px right 5px;
   }
